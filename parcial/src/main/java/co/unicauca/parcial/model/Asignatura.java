@@ -20,5 +20,5 @@ public class Asignatura {
     Set<Curso> cursos;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "AsignaturaDocente", joinColumns = @JoinColumn(name = "asignaturaId"), inverseJoinColumns = @JoinColumn(name = "docenteId"))
-    Set<Docente> docentes;
+    Set<Teacher> docentes;
 }
