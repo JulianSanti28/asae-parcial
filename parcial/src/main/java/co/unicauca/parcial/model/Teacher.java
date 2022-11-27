@@ -16,11 +16,12 @@ import java.util.Set;
 @Entity
 public class Teacher extends Person {
     @Column(length = 50, nullable = false)
-    private String universidad;
+    private String university;
     @Column(length = 50, nullable = false)
-    private String tipoDocente;
+    private String teacherType;
     @Column(length = 50, nullable = false)
-    private float salario;
-    @ManyToMany(mappedBy = "docentes", fetch = FetchType.LAZY)
-    Set<Asignatura> asignaturas;
+    private float salary;
+    @ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
+    Set<Subject> subjects;
+
 }

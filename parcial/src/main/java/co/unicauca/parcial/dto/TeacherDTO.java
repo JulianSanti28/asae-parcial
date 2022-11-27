@@ -1,10 +1,11 @@
 package co.unicauca.parcial.dto;
 
-
+import co.unicauca.parcial.model.Subject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 import java.util.Set;
 
@@ -12,12 +13,11 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DocenteDTO extends PersonaDTO{
+public class TeacherDTO extends PersonDTO {
 
-    private String universidad;
-    private String tipoDocente;
-    private float salario;
+    private String university;
+    private String teacherType;
+    private float salary;
 
-    Set<AsignaturaDTO> asignaturas;
-
+    Set<SubjectDTO> subjects;
 }

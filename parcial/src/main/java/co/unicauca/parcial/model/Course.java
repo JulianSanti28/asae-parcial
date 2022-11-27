@@ -9,12 +9,13 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class Curso {
+public class Course {
     @Id
     @Column(length = 40)
-    private String idCurso;
-    private String nombre;
-    private int periodo;
+    private String courseId;
+    private String name;
+    private int period;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Asignatura asignatura;
+    private Subject subject;
+
 }
