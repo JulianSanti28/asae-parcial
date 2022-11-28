@@ -7,6 +7,7 @@ import lombok.*;
 @MappedSuperclass
 @Getter
 @Setter @NoArgsConstructor @AllArgsConstructor
+@ToString
 public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

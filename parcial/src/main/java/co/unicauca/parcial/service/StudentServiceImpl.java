@@ -2,7 +2,9 @@ package co.unicauca.parcial.service;
 
 import co.unicauca.parcial.dao.IStudentRepository;
 import co.unicauca.parcial.dto.StudentDTO;
+import co.unicauca.parcial.model.Address;
 import co.unicauca.parcial.model.Student;
+import co.unicauca.parcial.model.Telephone;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -26,6 +28,10 @@ public class StudentServiceImpl implements IStudentService{
     @Qualifier("studentMapperBean")
     private ModelMapper studentMapper;
 
+    @Autowired
+    @Qualifier("studentMapperBean2")
+    private ModelMapper studentMapper2;
+
     @Override
     public StudentDTO saveStudent(StudentDTO save) {
         Student toSaveStudent = studentMapper.map(save, Student.class);
@@ -44,12 +50,41 @@ public class StudentServiceImpl implements IStudentService{
 
     @Override
     public StudentDTO getStudentById(Integer code) {
-        return null;
+        StudentDTO studentDTO = null;
+        //Implementation relations LAZY
+        /*
+        if(studentRepository.existsById(code)){
+            studentDTO = studentMapper.map(studentRepository.findById(code).get(),StudentDTO.class);
+        }
+        */
+
+
+        //Implementation relations EAGER
+        if(studentRepository.existsById(code)){
+            studentDTO = studentMapper2.map(studentRepository.findById(code).get(),StudentDTO.class);
+        }
+
+
+        return studentDTO;
     }
 
     @Override
     public StudentDTO updateStudent(Integer code, StudentDTO update) {
-        return null;
+        StudentDTO studentDTO = null;
+        if(this.studentRepository.existsById(code)){
+            Student student = this.studentRepository.findById(code).get();
+            student = studentMapper.map(update,Student.class);
+            student.setEntryDate(new Date(2010,9,12));
+            student.getAddress().setIdStudent(code);
+
+            for (Telephone t:student.getTelephones()){
+                t.setStudent(student);
+            }
+
+
+            studentDTO = studentMapper.map(this.studentRepository.save(student),StudentDTO.class);
+        }
+        return studentDTO;
     }
 
     @Override

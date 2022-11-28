@@ -15,7 +15,13 @@ public class Telephone {
     private Integer telephoneId;
     private String type;
     private String number;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "studentId")
     private Student student;
+    /*
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "studentId")
+    private Student student;
+    */
 }
