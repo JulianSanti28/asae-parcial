@@ -3,6 +3,7 @@ package co.unicauca.parcial.service;
 import co.unicauca.parcial.dao.ICourseRepository;
 import co.unicauca.parcial.dao.ISubjectRepository;
 import co.unicauca.parcial.dto.CourseDTO;
+import co.unicauca.parcial.dto.SubjectDTO;
 import co.unicauca.parcial.model.Course;
 import co.unicauca.parcial.model.Subject;
 import jakarta.transaction.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +24,9 @@ public class CourseService implements ICourseService{
     private ICourseRepository courseRepository;
     @Autowired
     private ISubjectRepository subjectRepository;
+    @Autowired
+    @Qualifier("subjectMapperBean")
+    private ModelMapper subjectMapper;
 
     @Autowired
     @Qualifier("courseMapperBean")
@@ -54,9 +59,19 @@ public class CourseService implements ICourseService{
     @Override
     @Transactional()
     public List<CourseDTO> findAllCourse() {
+        List<CourseDTO> courseDTOS = new ArrayList<>();
         Iterable<Course> courses = this.courseRepository.findAll();
+        //List<CourseDTO> coursesDTO = this.courseMapper.map(courses,new TypeToken<List<CourseDTO>>(){}.getType());
+        //return coursesDTO;
+        for(Course c:courses){
+            CourseDTO courseDTO = this.courseMapper.map(c,CourseDTO.class);
+            courseDTO.setSubject(this.subjectMapper.map(c.getSubject(), SubjectDTO.class));
+            courseDTOS.add(courseDTO);
+        }
 
-        return this.courseMapper.map(courses,new TypeToken<List<CourseDTO>>(){}.getType());
+        return courseDTOS;
+
+
     }
 
     @Override

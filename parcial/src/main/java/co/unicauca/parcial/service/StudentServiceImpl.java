@@ -52,18 +52,18 @@ public class StudentServiceImpl implements IStudentService{
     public StudentDTO getStudentById(Integer code) {
         StudentDTO studentDTO = null;
         //Implementation relations LAZY
-        /*
+
         if(studentRepository.existsById(code)){
             studentDTO = studentMapper.map(studentRepository.findById(code).get(),StudentDTO.class);
         }
-        */
 
 
+        /*
         //Implementation relations EAGER
         if(studentRepository.existsById(code)){
             studentDTO = studentMapper2.map(studentRepository.findById(code).get(),StudentDTO.class);
         }
-
+        */
 
         return studentDTO;
     }
@@ -74,7 +74,6 @@ public class StudentServiceImpl implements IStudentService{
         if(this.studentRepository.existsById(code)){
             Student student = this.studentRepository.findById(code).get();
             student = studentMapper.map(update,Student.class);
-            student.setEntryDate(new Date(2010,9,12));
             student.getAddress().setIdStudent(code);
 
             for (Telephone t:student.getTelephones()){
