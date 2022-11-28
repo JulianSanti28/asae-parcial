@@ -2,6 +2,7 @@ package co.unicauca.parcial.dto;
 
 import co.unicauca.parcial.model.Address;
 import co.unicauca.parcial.model.Telephone;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.PastOrPresent;
@@ -22,7 +23,9 @@ public class StudentDTO {
     private String identificationType;
     private String name;
     private String lastName;
-    @PastOrPresent(message = "Entry date cannot be future")
+    //@PastOrPresent(message = "Entry date cannot be future")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date entryDate;
     private AddressDTO address;
     Set<TelephoneDTO> telephones;

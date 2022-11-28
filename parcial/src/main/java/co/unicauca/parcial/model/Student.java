@@ -16,17 +16,17 @@ public class Student extends Person {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     private Date entryDate;
-
+    /*
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, mappedBy = "student")
     private Address address;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "student")
     Set<Telephone> telephones;
-    /*
+    */
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false, mappedBy = "student")
     private Address address;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "student")
     Set<Telephone> telephones;
-    */
+
 
 
     @Builder

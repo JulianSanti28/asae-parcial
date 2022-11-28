@@ -16,6 +16,7 @@ public class Course {
     private String name;
     private int period;
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_subject",nullable = false)
     private Subject subject;
 
 }

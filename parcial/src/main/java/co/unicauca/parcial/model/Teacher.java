@@ -21,7 +21,7 @@ public class Teacher extends Person {
     private String teacherType;
     @Column(length = 50, nullable = false)
     private float salary;
-    @ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
-    Set<Subject> subjects;
+    //@ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
+    //Set<Subject> subjects;
 
 }
