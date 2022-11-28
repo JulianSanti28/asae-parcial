@@ -21,6 +21,24 @@ public class StudentMapper {
 //        map.addMappings(m->m.skip(StudentDTO::setLastName)).implicitMappings();
 //        map.addMappings(m->m.skip(StudentDTO::setAddress)).implicitMappings();
 //        map.addMappings(m->m.skip(StudentDTO::setTelephones)).implicitMappings();
+//        map.addMappings(m->m.skip(StudentDTO::setEntryDate)).implicitMappings();
+
+        return mapper;
+    }
+
+    @Bean
+    @Qualifier("studentMapperBean2")
+    public ModelMapper modelMapper2() {
+        ModelMapper mapper = new ModelMapper();
+       TypeMap<Student, StudentDTO> map = mapper.emptyTypeMap(Student.class, StudentDTO.class);
+//        map.addMappings(m->m.skip(StudentDTO::setIdentificationNumber)).implicitMappings();
+//        map.addMappings(m->m.skip(StudentDTO::setIdentificationType)).implicitMappings();
+//        map.addMappings(m->m.skip(StudentDTO::setName)).implicitMappings();
+//        map.addMappings(m->m.skip(StudentDTO::setLastName)).implicitMappings();
+        map.addMappings(m->m.skip(StudentDTO::setAddress)).implicitMappings();
+        map.addMappings(m->m.skip(StudentDTO::setTelephones)).implicitMappings();
+//        map.addMappings(m->m.skip(StudentDTO::setEntryDate)).implicitMappings();
+
         return mapper;
     }
 }

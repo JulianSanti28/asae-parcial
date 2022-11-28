@@ -40,4 +40,33 @@ public class StudentController {
         Boolean isDeleted = this.studentService.deleteStudent(id);
         return !isDeleted ? ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al eliminar el estudiante") : ResponseEntity.status(HttpStatus.OK).body("Estudiante eliminado exitosamente");
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id){
+        ResponseEntity<?> responseEntity = null;
+        StudentDTO studentDTO = this.studentService.getStudentById(id);
+        if( studentDTO == null) {
+            responseEntity = new ResponseEntity("No se encontro el usuario", HttpStatus.NOT_FOUND);
+        }else {
+            responseEntity = new ResponseEntity(studentDTO, HttpStatus.OK);
+        }
+
+        return responseEntity;
+    }
+
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody StudentDTO body){
+        ResponseEntity<?> responseEntity = null;
+        StudentDTO studentDTO = this.studentService.updateStudent(body.getIdPerson(), body);
+
+        if( studentDTO == null) {
+            responseEntity = new ResponseEntity("No se encontro el usuario a actualizar", HttpStatus.NOT_FOUND);
+        }else {
+            responseEntity = new ResponseEntity(studentDTO, HttpStatus.OK);
+        }
+
+        return responseEntity;
+    }
+
+
 }
