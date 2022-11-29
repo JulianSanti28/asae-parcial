@@ -5,20 +5,17 @@ import co.unicauca.parcial.dao.ISubjectRepository;
 import co.unicauca.parcial.dto.CourseDTO;
 import co.unicauca.parcial.dto.SubjectDTO;
 import co.unicauca.parcial.model.Course;
-import co.unicauca.parcial.model.Subject;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class CourseService implements ICourseService{
+public class CourseServiceImpl implements ICourseService{
 
     @Autowired
     private ICourseRepository courseRepository;
