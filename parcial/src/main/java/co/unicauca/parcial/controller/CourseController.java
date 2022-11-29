@@ -22,7 +22,7 @@ public class CourseController {
     }
 
     @GetMapping
-    public List<CourseDTO> index(){
+    public List<CourseDTO> findAll(){
         return courseService.findAllCourse();
     }
 

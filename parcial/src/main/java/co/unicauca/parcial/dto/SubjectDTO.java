@@ -18,4 +18,14 @@ public class SubjectDTO {
 
     Set<CourseDTO> courses;
     Set<TeacherDTO> teachers;
+
+    @Override
+    public String toString() {
+        return "SubjectDTO{" +
+                "subjectId=" + subjectId +
+                ", name='" + name + '\'' +
+                ", courses=" + courses +
+                ", teachers=" + teachers +
+                '}';
+    }
 }

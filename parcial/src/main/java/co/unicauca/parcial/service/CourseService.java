@@ -34,26 +34,26 @@ public class CourseService implements ICourseService{
 
     @Override
     public CourseDTO saveCourse(CourseDTO course) {
+//        Course courseEntity = this.courseMapper.map(course,Course.class);
+//
+//        //Guardar el curso
+//        Course newCourse = this.courseRepository.save(courseEntity);
+//
+//        //Agregar el curso a la lista de cursos de la asigantura
+//        Subject subject = subjectRepository.findById(newCourse.getSubject().getSubjectId()).get();
+//        subject.getCourses().add(newCourse);
+//
+//        //Agregar la asignatura
+//        newCourse.setSubject(subject);
+//
+//        CourseDTO courseDTO = this.courseMapper.map(newCourse,CourseDTO.class);
+//        return courseDTO;
 
         Course courseEntity = this.courseMapper.map(course,Course.class);
-        System.out.println(courseEntity.getName());
 
-        //courseEntity.getSubject().getCourses().add(courseEntity);
-        Course objCourse = this.courseRepository.save(courseEntity);
-        System.out.println(objCourse.getName());
+        Course newCourse = this.courseRepository.save(courseEntity);
 
-        Optional<Subject> optionalSubject =subjectRepository.findById(objCourse.getSubject().getSubjectId());
-        Subject subject = optionalSubject.get();
-
-        //agregar el curso
-        subject.getCourses().add(objCourse);
-        //agregar la asignatura
-        objCourse.setSubject(subject);
-        System.out.println(objCourse.getSubject().getCourses());
-
-        CourseDTO courseDTO = this.courseMapper.map(objCourse,CourseDTO.class);
-
-        return courseDTO;
+        return this.courseMapper.map(newCourse,CourseDTO.class);
     }
 
     @Override
@@ -61,8 +61,7 @@ public class CourseService implements ICourseService{
     public List<CourseDTO> findAllCourse() {
         List<CourseDTO> courseDTOS = new ArrayList<>();
         Iterable<Course> courses = this.courseRepository.findAll();
-        //List<CourseDTO> coursesDTO = this.courseMapper.map(courses,new TypeToken<List<CourseDTO>>(){}.getType());
-        //return coursesDTO;
+
         for(Course c:courses){
             CourseDTO courseDTO = this.courseMapper.map(c,CourseDTO.class);
             courseDTO.setSubject(this.subjectMapper.map(c.getSubject(), SubjectDTO.class));
@@ -71,7 +70,11 @@ public class CourseService implements ICourseService{
 
         return courseDTOS;
 
-
+//        Iterable<Course> courses = this.courseRepository.findAll();
+//        List<CourseDTO> coursesDTO = this.courseMapper.map(courses, new TypeToken<List<CourseDTO>>() {
+//        }.getType());
+//
+//        return coursesDTO;
     }
 
     @Override
