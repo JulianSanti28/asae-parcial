@@ -2,6 +2,9 @@ package co.unicauca.parcial.dto;
 
 import co.unicauca.parcial.dto.SubjectDTO;
 import co.unicauca.parcial.model.Subject;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
@@ -11,12 +14,13 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseDTO {
 
     private String courseId;
     private String name;
     private int period;
-
+    @JsonManagedReference
     private SubjectDTO subject;
 
     @Override

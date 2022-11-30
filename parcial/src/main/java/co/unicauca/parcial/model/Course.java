@@ -1,8 +1,6 @@
 package co.unicauca.parcial.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,9 +16,6 @@ public class Course {
     private String courseId;
     private String name;
     private int period;
-
-
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_subject",nullable = false)
     private Subject subject;

@@ -1,6 +1,7 @@
 package co.unicauca.parcial.dto;
 
 import co.unicauca.parcial.model.Subject;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TeacherDTO extends PersonDTO {
 
     private String university;

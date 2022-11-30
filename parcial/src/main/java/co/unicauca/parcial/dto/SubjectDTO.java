@@ -1,8 +1,6 @@
 package co.unicauca.parcial.dto;
 
-import co.unicauca.parcial.model.Course;
-import co.unicauca.parcial.model.Teacher;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import java.util.Set;
@@ -15,13 +13,10 @@ import java.util.Set;
 public class SubjectDTO {
 
     private Integer subjectId;
-
     private String name;
-
-//    Set<CourseDTO> courses;
-
+    @JsonBackReference
+    Set<CourseDTO> courses;
     Set<TeacherDTO> teachers;
-
     @Override
     public String toString() {
         return "SubjectDTO{" +

@@ -2,6 +2,7 @@ package co.unicauca.parcial.service;
 
 import co.unicauca.parcial.dao.ISubjectRepository;
 import co.unicauca.parcial.dto.SubjectDTO;
+import co.unicauca.parcial.model.Course;
 import co.unicauca.parcial.model.Subject;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class SubjectServiceImpl implements ISubjectService{
@@ -27,12 +30,20 @@ public class SubjectServiceImpl implements ISubjectService{
 
     @Override
     public SubjectDTO saveSubject(SubjectDTO subject) {
-
-        return this.subjectMapper
-                .map(this.subjectRepository
-                        .save(this.subjectMapper
-                                .map(subject, Subject.class)),SubjectDTO.class);
-
+//        Subject newSubject = this.subjectMapper.map(subject, Subject.class);
+//
+//        Set<Course> courses = new HashSet<>();
+//        for (CourseDTO c: subject.getCourses()){
+//            Course course = this.courseMapper.map(c, Course.class);
+//            course.setSubject(newSubject);
+//            courses.add(course);
+//        }
+//
+//        newSubject.setCourses(courses);
+//
+//
+//        return this.subjectMapper.map(this.subjectRepository.save(newSubject), SubjectDTO.class);
+        return null;
     }
 
     @Override
