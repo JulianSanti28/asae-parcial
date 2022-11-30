@@ -1,4 +1,4 @@
-package co.unicauca.parcial.dto.course;
+package co.unicauca.parcial.dto;
 
 import co.unicauca.parcial.dto.SubjectDTO;
 import co.unicauca.parcial.model.Subject;

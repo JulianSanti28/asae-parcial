@@ -1,7 +1,6 @@
 package co.unicauca.parcial.controller;
 
-import co.unicauca.parcial.dto.course.CourseDTO;
-import co.unicauca.parcial.dto.course.CourseNotFoundException;
+import co.unicauca.parcial.dto.CourseDTO;
 import co.unicauca.parcial.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +30,7 @@ public class CourseController {
     }
 
     @GetMapping("{idCurso}")
-    public ResponseEntity<CourseDTO> findById(@PathVariable String idCurso) throws CourseNotFoundException {
+    public ResponseEntity<CourseDTO> findById(@PathVariable String idCurso) {
         Optional<CourseDTO> course = courseService.getCourseById(idCurso);
 
         if (course.isPresent()){

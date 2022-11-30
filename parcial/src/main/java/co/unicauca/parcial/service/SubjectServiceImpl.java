@@ -2,7 +2,6 @@ package co.unicauca.parcial.service;
 
 import co.unicauca.parcial.dao.ISubjectRepository;
 import co.unicauca.parcial.dto.SubjectDTO;
-import co.unicauca.parcial.dto.course.CourseDTO;
 import co.unicauca.parcial.model.Subject;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

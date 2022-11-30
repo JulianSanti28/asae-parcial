@@ -1,7 +1,6 @@
 package co.unicauca.parcial.controller;
 
 import co.unicauca.parcial.dto.SubjectDTO;
-import co.unicauca.parcial.dto.course.CourseDTO;
 import co.unicauca.parcial.service.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

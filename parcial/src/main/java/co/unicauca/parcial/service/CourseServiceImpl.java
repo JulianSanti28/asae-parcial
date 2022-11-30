@@ -2,17 +2,17 @@ package co.unicauca.parcial.service;
 
 import co.unicauca.parcial.dao.ICourseRepository;
 import co.unicauca.parcial.dao.ISubjectRepository;
-import co.unicauca.parcial.dto.course.CourseDTO;
-import co.unicauca.parcial.dto.course.CourseNotFoundException;
+import co.unicauca.parcial.dto.CourseDTO;
 import co.unicauca.parcial.model.Course;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements ICourseService{
@@ -49,7 +49,7 @@ public class CourseServiceImpl implements ICourseService{
     }
 
     @Override
-    public Optional<CourseDTO> getCourseById(String courseId) throws CourseNotFoundException {
+    public Optional<CourseDTO> getCourseById(String courseId) {
 
         if (this.courseRepository.existsById(courseId)){
             return Optional.of(this.courseMapper.map(this.courseRepository.findById(courseId).get(),CourseDTO.class));
