@@ -19,14 +19,22 @@ import java.util.Set;
 @AllArgsConstructor
 public class StudentDTO {
     private Integer idPerson;
+
     private String identificationNumber;
+
     private String identificationType;
+
     private String name;
+
     private String lastName;
+
     //@PastOrPresent(message = "Entry date cannot be future")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "YYYY-MM-dd")
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+//    @Temporal(TemporalType.DATE)
     private Date entryDate;
+
     private AddressDTO address;
+
     Set<TelephoneDTO> telephones;
 }

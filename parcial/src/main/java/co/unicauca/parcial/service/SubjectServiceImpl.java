@@ -30,20 +30,16 @@ public class SubjectServiceImpl implements ISubjectService{
 
     @Override
     public SubjectDTO saveSubject(SubjectDTO subject) {
-//        Subject newSubject = this.subjectMapper.map(subject, Subject.class);
-//
-//        Set<Course> courses = new HashSet<>();
-//        for (CourseDTO c: subject.getCourses()){
-//            Course course = this.courseMapper.map(c, Course.class);
-//            course.setSubject(newSubject);
-//            courses.add(course);
-//        }
-//
-//        newSubject.setCourses(courses);
-//
-//
-//        return this.subjectMapper.map(this.subjectRepository.save(newSubject), SubjectDTO.class);
-        return null;
+
+        if (subject.getTeachers().size() < 2 && subject.getCourses().isEmpty()) return null;
+
+        Subject requestSubject = this.subjectMapper.map(subject, Subject.class);
+        requestSubject.getCourses().forEach(course -> {
+            course.setSubject(requestSubject);
+        });
+
+        Subject savedSubject = this.subjectRepository.save(requestSubject);
+        return this.subjectMapper.map(savedSubject, SubjectDTO.class);
     }
 
     @Override

@@ -37,7 +37,6 @@ public class StudentServiceImpl implements IStudentService{
         Student toSaveStudent = studentMapper.map(save, Student.class);
         toSaveStudent.getAddress().setStudent(toSaveStudent);
         toSaveStudent.getTelephones().forEach(x->x.setStudent(toSaveStudent));
-        toSaveStudent.setEntryDate(new Date());
         Student savedStudent = this.studentRepository.save(toSaveStudent);
         return studentMapper.map(savedStudent, StudentDTO.class);
     }

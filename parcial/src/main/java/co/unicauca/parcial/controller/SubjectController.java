@@ -1,5 +1,6 @@
 package co.unicauca.parcial.controller;
 
+import co.unicauca.parcial.dto.StudentDTO;
 import co.unicauca.parcial.dto.SubjectDTO;
 import co.unicauca.parcial.service.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,9 @@ public class SubjectController {
         }
     }
     @PostMapping
-    public SubjectDTO save (@RequestBody SubjectDTO newSubject){
-        return this.subjectService.saveSubject(newSubject);
+    public ResponseEntity<?> save (@RequestBody SubjectDTO newSubject){
+        SubjectDTO savedSubject = this.subjectService.saveSubject(newSubject);
+        if(savedSubject == null) return ResponseEntity.badRequest().body("No se pudo crear la Asignatura!");
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedSubject);
     }
 }

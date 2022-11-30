@@ -14,8 +14,10 @@ public class SubjectDTO {
 
     private Integer subjectId;
     private String name;
+
     @JsonBackReference
     Set<CourseDTO> courses;
+
     Set<TeacherDTO> teachers;
     @Override
     public String toString() {

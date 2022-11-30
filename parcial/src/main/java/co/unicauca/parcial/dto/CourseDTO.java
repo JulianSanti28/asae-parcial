@@ -20,7 +20,7 @@ public class CourseDTO {
     private String courseId;
     private String name;
     private int period;
-    @JsonManagedReference
+
     private SubjectDTO subject;
 
     @Override
