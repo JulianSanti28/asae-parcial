@@ -31,7 +31,7 @@ public class SubjectServiceImpl implements ISubjectService{
     @Override
     public SubjectDTO saveSubject(SubjectDTO subject) {
 
-        if (subject.getTeachers().size() < 2 && subject.getCourses().isEmpty()) return null;
+        if (subject.getTeachers().size() < 2 || subject.getCourses().isEmpty()) return null;
 
         Subject requestSubject = this.subjectMapper.map(subject, Subject.class);
         requestSubject.getCourses().forEach(course -> {

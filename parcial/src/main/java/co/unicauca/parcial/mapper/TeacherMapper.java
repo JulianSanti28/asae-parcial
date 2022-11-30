@@ -16,8 +16,7 @@ public class TeacherMapper {
     @Qualifier("teacherMapperBean")
     public ModelMapper modelMapperTeacher() {
         ModelMapper mapper = new ModelMapper();
-        TypeMap<Teacher, TeacherDTO> map = mapper.emptyTypeMap(Teacher.class,TeacherDTO.class);
-        map.addMappings(m->m.skip(TeacherDTO::setTeacherType)).implicitMappings();
+
         return mapper;
     }
 }

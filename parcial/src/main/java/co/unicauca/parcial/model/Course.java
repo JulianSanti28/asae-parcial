@@ -16,7 +16,7 @@ public class Course {
     private String courseId;
     private String name;
     private int period;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_subject",nullable = false)
     private Subject subject;
 

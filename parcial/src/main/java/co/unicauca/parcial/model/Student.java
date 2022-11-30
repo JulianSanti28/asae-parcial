@@ -14,10 +14,8 @@ import java.util.Set;
 public class Student extends Person {
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date entryDate;
-
 
 //    NO BORRAR, ESTO ES PARTE DE UN PUNTO!!!
     /*

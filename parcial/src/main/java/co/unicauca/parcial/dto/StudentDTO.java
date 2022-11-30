@@ -28,11 +28,8 @@ public class StudentDTO {
 
     private String lastName;
 
-    //@PastOrPresent(message = "Entry date cannot be future")
-//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
-//    @Temporal(TemporalType.DATE)
-    private Date entryDate;
+    private String entryDate;
 
     private AddressDTO address;
 
