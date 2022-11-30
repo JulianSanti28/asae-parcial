@@ -13,10 +13,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectDTO {
+
     private Integer subjectId;
+
     private String name;
 
-    Set<CourseDTO> courses;
+//    Set<CourseDTO> courses;
+
     Set<TeacherDTO> teachers;
 
     @Override
@@ -24,8 +27,6 @@ public class SubjectDTO {
         return "SubjectDTO{" +
                 "subjectId=" + subjectId +
                 ", name='" + name + '\'' +
-                ", courses=" + courses +
-                ", teachers=" + teachers +
                 '}';
     }
 }

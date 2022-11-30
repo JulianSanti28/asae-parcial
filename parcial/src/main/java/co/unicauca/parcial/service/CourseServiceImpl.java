@@ -2,8 +2,8 @@ package co.unicauca.parcial.service;
 
 import co.unicauca.parcial.dao.ICourseRepository;
 import co.unicauca.parcial.dao.ISubjectRepository;
-import co.unicauca.parcial.dto.CourseDTO;
-import co.unicauca.parcial.dto.SubjectDTO;
+import co.unicauca.parcial.dto.course.CourseDTO;
+import co.unicauca.parcial.dto.course.CourseNotFoundException;
 import co.unicauca.parcial.model.Course;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.swing.text.html.Option;
 import java.util.List;
 
 @Service
@@ -31,21 +31,6 @@ public class CourseServiceImpl implements ICourseService{
 
     @Override
     public CourseDTO saveCourse(CourseDTO course) {
-//        Course courseEntity = this.courseMapper.map(course,Course.class);
-//
-//        //Guardar el curso
-//        Course newCourse = this.courseRepository.save(courseEntity);
-//
-//        //Agregar el curso a la lista de cursos de la asigantura
-//        Subject subject = subjectRepository.findById(newCourse.getSubject().getSubjectId()).get();
-//        subject.getCourses().add(newCourse);
-//
-//        //Agregar la asignatura
-//        newCourse.setSubject(subject);
-//
-//        CourseDTO courseDTO = this.courseMapper.map(newCourse,CourseDTO.class);
-//        return courseDTO;
-
         Course courseEntity = this.courseMapper.map(course,Course.class);
 
         Course newCourse = this.courseRepository.save(courseEntity);
@@ -56,27 +41,21 @@ public class CourseServiceImpl implements ICourseService{
     @Override
     @Transactional()
     public List<CourseDTO> findAllCourse() {
-        List<CourseDTO> courseDTOS = new ArrayList<>();
         Iterable<Course> courses = this.courseRepository.findAll();
+        List<CourseDTO> coursesDTO = this.courseMapper.map(courses, new TypeToken<List<CourseDTO>>() {
+        }.getType());
 
-        for(Course c:courses){
-            CourseDTO courseDTO = this.courseMapper.map(c,CourseDTO.class);
-            courseDTO.setSubject(this.subjectMapper.map(c.getSubject(), SubjectDTO.class));
-            courseDTOS.add(courseDTO);
-        }
-
-        return courseDTOS;
-
-//        Iterable<Course> courses = this.courseRepository.findAll();
-//        List<CourseDTO> coursesDTO = this.courseMapper.map(courses, new TypeToken<List<CourseDTO>>() {
-//        }.getType());
-//
-//        return coursesDTO;
+        return coursesDTO;
     }
 
     @Override
-    public CourseDTO getCourseById(String courseId) {
-        return null; //TODO
+    public Optional<CourseDTO> getCourseById(String courseId) throws CourseNotFoundException {
+
+        if (this.courseRepository.existsById(courseId)){
+            return Optional.of(this.courseMapper.map(this.courseRepository.findById(courseId).get(),CourseDTO.class));
+        }
+
+        return Optional.empty();
     }
 
     @Override

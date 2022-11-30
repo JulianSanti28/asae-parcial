@@ -15,8 +15,9 @@ public class SubjectMapper {
     @Qualifier("subjectMapperBean")
     public ModelMapper modelMapperSubject(){
         ModelMapper mapper = new ModelMapper();
-        TypeMap<Subject, SubjectDTO> map = mapper.emptyTypeMap(Subject.class,SubjectDTO.class);
-        map.addMappings(m->m.skip(SubjectDTO::setCourses)).implicitMappings();
+//        TypeMap<Subject, SubjectDTO> map = mapper.emptyTypeMap(Subject.class,SubjectDTO.class);
+//        map.addMappings(m->m.skip(SubjectDTO::setCourses)).implicitMappings();
+//        map.addMappings(m->m.skip(SubjectDTO::setTeachers)).implicitMappings();
         return mapper;
     }
 }

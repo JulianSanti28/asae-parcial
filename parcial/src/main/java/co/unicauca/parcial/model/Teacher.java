@@ -15,13 +15,17 @@ import java.util.Set;
 @Builder
 @Entity
 public class Teacher extends Person {
+
     @Column(length = 50, nullable = false)
     private String university;
+
     @Column(length = 50, nullable = false)
     private String teacherType;
+
     @Column(length = 50, nullable = false)
     private float salary;
-//    @ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
-//    Set<Subject> subjects;
+
+    @ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
+    Set<Subject> subjects;
 
 }

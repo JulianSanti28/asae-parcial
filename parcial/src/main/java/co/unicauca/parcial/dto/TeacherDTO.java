@@ -16,8 +16,10 @@ import java.util.Set;
 public class TeacherDTO extends PersonDTO {
 
     private String university;
+
     private String teacherType;
+
     private float salary;
 
-    Set<SubjectDTO> subjects;
+//    Set<SubjectDTO> subjects;
 }

@@ -2,6 +2,7 @@ package co.unicauca.parcial.service;
 
 import co.unicauca.parcial.dao.ISubjectRepository;
 import co.unicauca.parcial.dto.SubjectDTO;
+import co.unicauca.parcial.dto.course.CourseDTO;
 import co.unicauca.parcial.model.Subject;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubjectServiceImpl implements ISubjectService{
@@ -20,19 +22,26 @@ public class SubjectServiceImpl implements ISubjectService{
     @Qualifier("subjectMapperBean")
     private ModelMapper subjectMapper;
 
+    @Autowired
+    @Qualifier("courseMapperBean")
+    private ModelMapper courseMapper;
+
     @Override
     public SubjectDTO saveSubject(SubjectDTO subject) {
-
-        Subject newSubject = this.subjectRepository.save(this.subjectMapper.map(subject, Subject.class));
-
-        newSubject.getCourses().forEach(x -> {
-            x.setSubject(newSubject);
-        });
-
-        //todo crear techer
-        //todo crear course
-
-        return this.subjectMapper.map(newSubject, SubjectDTO.class);
+//        Subject newSubject = this.subjectMapper.map(subject, Subject.class);
+//
+//        Set<Course> courses = new HashSet<>();
+//        for (CourseDTO c: subject.getCourses()){
+//            Course course = this.courseMapper.map(c, Course.class);
+//            course.setSubject(newSubject);
+//            courses.add(course);
+//        }
+//
+//        newSubject.setCourses(courses);
+//
+//
+//        return this.subjectMapper.map(this.subjectRepository.save(newSubject), SubjectDTO.class);
+        return null;
     }
 
     @Override
@@ -46,17 +55,21 @@ public class SubjectServiceImpl implements ISubjectService{
     }
 
     @Override
-    public SubjectDTO getSubjectById(String subjectId) {
-        return null;
+    public Optional<SubjectDTO> getSubjectById(int subjectId) {
+        if (this.subjectRepository.existsById(subjectId)){
+            return Optional.of(this.subjectMapper.map(this.subjectRepository.findById(subjectId).get(), SubjectDTO.class));
+        }
+
+        return Optional.empty();
     }
 
     @Override
-    public SubjectDTO updateSubject(String subjectId, SubjectDTO subject) {
+    public SubjectDTO updateSubject(int subjectId, SubjectDTO subject) {
         return null; //Todo
     }
 
     @Override
-    public boolean deleteSubject(String subjectId) {
+    public boolean deleteSubject(int subjectId) {
         return false; //Todo
     }
 }

@@ -1,14 +1,15 @@
 package co.unicauca.parcial.controller;
 
-import co.unicauca.parcial.dto.CourseDTO;
 import co.unicauca.parcial.dto.SubjectDTO;
-import co.unicauca.parcial.dto.TeacherDTO;
-import co.unicauca.parcial.model.Course;
+import co.unicauca.parcial.dto.course.CourseDTO;
 import co.unicauca.parcial.service.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/subject")
@@ -22,11 +23,19 @@ public class SubjectController {
         return subjectService.findAllSubject();
     }
 
+    @GetMapping("{subjectId}")
+    public ResponseEntity<SubjectDTO> getSubjectById(@PathVariable int subjectId){
+        Optional<SubjectDTO> subject = this.subjectService.getSubjectById(subjectId);
+
+        if (subject.isPresent()){
+            return new ResponseEntity<>(subject.get(), HttpStatus.FOUND);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping
-    public SubjectDTO save (@RequestBody SubjectDTO newSubject, @RequestBody CourseDTO course, @RequestBody TeacherDTO teacher){
-        System.out.println(newSubject);
-        System.out.println(course);
-        System.out.println(teacher);
+    public SubjectDTO save (@RequestBody SubjectDTO newSubject){
         return this.subjectService.saveSubject(newSubject);
     }
 }
