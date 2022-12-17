@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Builder
@@ -18,6 +19,7 @@ import lombok.*;
 public class CourseDTO {
 
     private String courseId;
+    @Size(min = 5, max = 25, message = "{course.name.size}")
     private String name;
     private int period;
 

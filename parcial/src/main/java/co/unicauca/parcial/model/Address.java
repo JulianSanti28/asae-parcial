@@ -12,8 +12,7 @@ import lombok.*;
 public class Address {
     @Id
     private Integer idStudent;
-    private String telephoneNumber;
-    private String telephoneType;
+    private String ubication;
     @OneToOne
     @MapsId
     @JoinColumn(name = "studentId")

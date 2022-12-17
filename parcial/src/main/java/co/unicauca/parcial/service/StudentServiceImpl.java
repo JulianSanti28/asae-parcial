@@ -25,25 +25,25 @@ public class StudentServiceImpl implements IStudentService{
     private IStudentRepository studentRepository;
 
     @Autowired
-    @Qualifier("studentMapperBean")
-    private ModelMapper studentMapper;
+    @Qualifier("studentModelMapper")
+    private ModelMapper studentModelMapper;
 
     @Autowired
-    @Qualifier("studentMapperBean2")
-    private ModelMapper studentMapper2;
+    @Qualifier("modelMapperStudentToStudentDto")
+    private ModelMapper modelMapperStudentToStudentDto;
 
     @Override
     public StudentDTO saveStudent(StudentDTO save) {
-        Student toSaveStudent = studentMapper.map(save, Student.class);
+        Student toSaveStudent = studentModelMapper.map(save, Student.class);
         toSaveStudent.getAddress().setStudent(toSaveStudent);
         toSaveStudent.getTelephones().forEach(x->x.setStudent(toSaveStudent));
         Student savedStudent = this.studentRepository.save(toSaveStudent);
-        return studentMapper.map(savedStudent, StudentDTO.class);
+        return studentModelMapper.map(savedStudent, StudentDTO.class);
     }
     @Override
     public List<StudentDTO> findAllStudent() {
         Iterable<Student> students = this.studentRepository.findAll();
-        return this.studentMapper.map(students, new TypeToken<List<StudentDTO>>() {
+        return this.studentModelMapper.map(students, new TypeToken<List<StudentDTO>>() {
         }.getType());
     }
 
@@ -53,14 +53,14 @@ public class StudentServiceImpl implements IStudentService{
         //Implementation relations LAZY
 
         if(studentRepository.existsById(code)){
-            studentDTO = studentMapper.map(studentRepository.findById(code).get(),StudentDTO.class);
+            studentDTO = studentModelMapper.map(studentRepository.findById(code).get(),StudentDTO.class);
         }
 
 
         /*
         //Implementation relations EAGER
         if(studentRepository.existsById(code)){
-            studentDTO = studentMapper2.map(studentRepository.findById(code).get(),StudentDTO.class);
+            studentDTO = modelMapperStudentToStudentDto.map(studentRepository.findById(code).get(),StudentDTO.class);
         }
         */
 
@@ -72,7 +72,7 @@ public class StudentServiceImpl implements IStudentService{
         StudentDTO studentDTO = null;
         if(this.studentRepository.existsById(code)){
             Student student = this.studentRepository.findById(code).get();
-            student = studentMapper.map(update,Student.class);
+            student = studentModelMapper.map(update,Student.class);
             student.getAddress().setIdStudent(code);
 
             for (Telephone t:student.getTelephones()){
@@ -80,7 +80,7 @@ public class StudentServiceImpl implements IStudentService{
             }
 
 
-            studentDTO = studentMapper.map(this.studentRepository.save(student),StudentDTO.class);
+            studentDTO = studentModelMapper.map(this.studentRepository.save(student),StudentDTO.class);
         }
         return studentDTO;
     }

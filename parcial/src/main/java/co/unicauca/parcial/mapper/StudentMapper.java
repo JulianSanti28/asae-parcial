@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StudentMapper {
     @Bean
-    @Qualifier("studentMapperBean")
-    public ModelMapper modelMapper() {
+    @Qualifier("studentModelMapper")
+    public ModelMapper studentModelMapper() {
         ModelMapper mapper = new ModelMapper();
 //        TypeMap<Student, StudentDTO> map = mapper.emptyTypeMap(Student.class, StudentDTO.class);
 //        map.addMappings(m->m.skip(StudentDTO::setIdentificationNumber)).implicitMappings();
@@ -27,10 +27,10 @@ public class StudentMapper {
     }
 
     @Bean
-    @Qualifier("studentMapperBean2")
-    public ModelMapper modelMapper2() {
+    @Qualifier("modelMapperStudentToStudentDto")
+    public ModelMapper modelMapperStudentToStudentDto() {
         ModelMapper mapper = new ModelMapper();
-       TypeMap<Student, StudentDTO> map = mapper.emptyTypeMap(Student.class, StudentDTO.class);
+        TypeMap<Student, StudentDTO> map = mapper.emptyTypeMap(Student.class, StudentDTO.class);
 //        map.addMappings(m->m.skip(StudentDTO::setIdentificationNumber)).implicitMappings();
 //        map.addMappings(m->m.skip(StudentDTO::setIdentificationType)).implicitMappings();
 //        map.addMappings(m->m.skip(StudentDTO::setName)).implicitMappings();

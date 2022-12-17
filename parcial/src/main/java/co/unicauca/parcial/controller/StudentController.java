@@ -3,18 +3,20 @@ package co.unicauca.parcial.controller;
 
 import co.unicauca.parcial.dto.StudentDTO;
 import co.unicauca.parcial.service.IStudentService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/student")
+@Validated
 public class StudentController {
 
     private final IStudentService studentService;
@@ -25,7 +27,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveStudent(@RequestBody StudentDTO request){
+    public ResponseEntity<?> saveStudent(@Valid @RequestBody StudentDTO request){
         StudentDTO savedStudent = this.studentService.saveStudent(request);
         if(savedStudent == null) return ResponseEntity.badRequest().body("No se pudo crear el estudiante!");
         return ResponseEntity.status(HttpStatus.CREATED).body(savedStudent);
@@ -42,7 +44,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id){
+    public ResponseEntity<?> findById(@Min(0) @PathVariable Integer id){
         ResponseEntity<?> responseEntity = null;
         StudentDTO studentDTO = this.studentService.getStudentById(id);
         if( studentDTO == null) {
@@ -55,7 +57,7 @@ public class StudentController {
     }
 
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody StudentDTO body){
+    public ResponseEntity<?> update(@Valid @RequestBody StudentDTO body){
         ResponseEntity<?> responseEntity = null;
         StudentDTO studentDTO = this.studentService.updateStudent(body.getIdPerson(), body);
 

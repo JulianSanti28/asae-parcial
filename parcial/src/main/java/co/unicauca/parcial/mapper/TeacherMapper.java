@@ -1,8 +1,6 @@
 package co.unicauca.parcial.mapper;
 
-import co.unicauca.parcial.dto.CourseDTO;
 import co.unicauca.parcial.dto.TeacherDTO;
-import co.unicauca.parcial.model.Course;
 import co.unicauca.parcial.model.Teacher;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;

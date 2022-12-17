@@ -1,6 +1,7 @@
 package co.unicauca.parcial.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.Set;
 public class SubjectDTO {
 
     private Integer subjectId;
+    @Size(min = 5, max = 25, message = "{subject.name.size}")
     private String name;
 
     @JsonBackReference

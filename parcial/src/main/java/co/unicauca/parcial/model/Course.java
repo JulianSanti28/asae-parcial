@@ -3,6 +3,7 @@ package co.unicauca.parcial.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @NoArgsConstructor
@@ -15,6 +16,7 @@ public class Course {
     @Column(length = 40)
     private String courseId;
     private String name;
+    @Range(min = 1, max = 2, message = "{course.constrain}")
     private int period;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_subject",nullable = false)

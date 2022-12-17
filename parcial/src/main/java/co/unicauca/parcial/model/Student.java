@@ -16,6 +16,7 @@ public class Student extends Person {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date entryDate;
+    private String email;
 
 //    NO BORRAR, ESTO ES PARTE DE UN PUNTO!!!
     /*
