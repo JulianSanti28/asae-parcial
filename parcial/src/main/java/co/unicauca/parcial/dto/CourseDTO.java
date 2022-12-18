@@ -1,14 +1,11 @@
 package co.unicauca.parcial.dto;
 
-import co.unicauca.parcial.dto.SubjectDTO;
-import co.unicauca.parcial.model.Subject;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 
 @Builder
 @Getter
@@ -17,10 +14,11 @@ import lombok.*;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseDTO {
-
+    @NotBlank(message = "{standard.string.constrain}")
     private String courseId;
     @Size(min = 5, max = 25, message = "{course.name.size}")
     private String name;
+    @Range(min = 1, max = 2, message = "{course.constrain}")
     private int period;
 
     private SubjectDTO subject;

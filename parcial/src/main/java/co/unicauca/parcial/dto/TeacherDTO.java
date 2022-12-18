@@ -3,6 +3,8 @@ package co.unicauca.parcial.dto;
 import co.unicauca.parcial.model.Subject;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,11 +19,11 @@ import java.util.Set;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TeacherDTO extends PersonDTO {
-
+    @NotBlank(message = "{standard.string.constrain}")
     private String university;
-
+    @NotBlank(message = "{standard.string.constrain}")
     private String teacherType;
-    @Min(value = 0, message = "{teacher.salary.min}")
+    @Positive(message = "{teacher.salary.min}")
     private float salary;
 
 //    Set<SubjectDTO> subjects;
