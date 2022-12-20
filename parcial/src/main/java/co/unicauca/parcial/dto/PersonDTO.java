@@ -20,9 +20,9 @@ public class PersonDTO {
     @NotBlank(message = "{user.identificationType.empty}")
     private String identificationType;
     @NotNull(message = "{user.name.null}")
-    @Size(min = 5, max = 45, message = "{user.name.size}")
+    @Size(min = 3, max = 50, message = "{user.name.size}")
     private String name;
     @NotNull(message = "{user.lastName.null}")
-    @Size(min = 5, max = 45, message = "{user.lastName.size}")
+    @Size(min = 3, max = 50, message = "{user.lastName.size}")
     private String lastName;
 }
