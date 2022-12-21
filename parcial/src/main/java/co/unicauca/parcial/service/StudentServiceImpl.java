@@ -120,6 +120,11 @@ public class StudentServiceImpl implements IStudentService{
         List<Student> students = this.studentRepository.findByNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrEmailContainingIgnoreCase(name, lastName, email);
         return students.stream().map(x -> this.studentModelMapper.map(x, StudentDTO.class)).collect(Collectors.toList());
     }
+    @Override
+    public List<StudentDTO> findAllStudentWithinDnaList(List<String> identificationNumber) {
+        List<Student> students = this.studentRepository.findAllByIdentificationNumberIn(identificationNumber);
+        return students.stream().map(stu -> this.studentModelMapper.map(stu,StudentDTO.class)).collect(Collectors.toList());
+    }
 
 
 }

@@ -41,4 +41,10 @@ public class SubjectController {
         if(savedSubject == null) return ResponseEntity.badRequest().body("No se pudo crear la Asignatura!");
         return ResponseEntity.status(HttpStatus.CREATED).body(savedSubject);
     }
+    @GetMapping("/findLike")
+    public ResponseEntity<?> findByName(@RequestParam(name = "name") String name){
+        List<SubjectDTO> subjectDTOs = this.subjectService.findByNameAsc(name);
+        if (subjectDTOs.isEmpty()) return new ResponseEntity(subjectDTOs, HttpStatus.NO_CONTENT);
+        return new ResponseEntity(subjectDTOs, HttpStatus.OK);
+    }
 }

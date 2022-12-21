@@ -11,4 +11,5 @@ public interface ISubjectService {
     Optional<SubjectDTO> getSubjectById(int subjectId);
     SubjectDTO updateSubject(int subjectId, SubjectDTO subject);
     boolean deleteSubject(int subjectId);
+    List<SubjectDTO> findByNameAsc(String name);
 }

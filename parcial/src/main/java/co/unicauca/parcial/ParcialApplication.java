@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
-public class ParcialApplication implements CommandLineRunner {
+public class ParcialApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
 		SpringApplication.run(ParcialApplication.class, args);
@@ -34,11 +34,11 @@ public class ParcialApplication implements CommandLineRunner {
 		studentList.add("10461876666");
 		studentList.add("10461876667");
 		studentList.add("10461876668");
-		Set<Student> studentSet = iStudentRepository.findAllByIdentificationNumberIn(studentList);
+		List<Student> studentSet = iStudentRepository.findAllByIdentificationNumberIn(studentList);
 
 		studentSet.forEach(System.out::println);
 
-		Set<Subject> subjectSet = iSubjectRepository.findAllByNameContainingIgnoreCaseOrderByNameAsc("cal");
+		List<Subject> subjectSet = iSubjectRepository.findAllByNameContainingIgnoreCaseOrderByNameAsc("cal");
 
 		subjectSet.forEach(System.out::println);
 	}

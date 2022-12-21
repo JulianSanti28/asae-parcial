@@ -78,6 +78,11 @@ public class StudentController {
 
         return new ResponseEntity(studentDTOS, HttpStatus.OK);
     }
-
+    @GetMapping("/findWithIn")
+    public ResponseEntity<?> findStudentWithInDnaList(@RequestParam(name ="identificationNumber") List<String> identificationNumber){
+        List<StudentDTO> students = this.studentService.findAllStudentWithinDnaList(identificationNumber);
+        if(students.isEmpty()) return new ResponseEntity(students, HttpStatus.NO_CONTENT);
+        return new ResponseEntity(students,HttpStatus.OK);
+    }
 
 }

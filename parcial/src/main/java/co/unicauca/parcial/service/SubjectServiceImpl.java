@@ -11,6 +11,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 
 import java.util.HashSet;
 import java.util.List;
@@ -75,5 +76,11 @@ public class SubjectServiceImpl implements ISubjectService{
     @Override
     public boolean deleteSubject(int subjectId) {
         return false; //Todo
+    }
+
+    @Override
+    public List<SubjectDTO> findByNameAsc(String name) {
+        List<Subject> subjects = this.subjectRepository.findAllByNameContainingIgnoreCaseOrderByNameAsc(name);
+        return subjects.stream().map(subj -> this.subjectMapper.map(subj, SubjectDTO.class)).collect(Collectors.toList());
     }
 }
