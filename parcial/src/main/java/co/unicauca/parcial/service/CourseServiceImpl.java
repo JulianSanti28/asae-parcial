@@ -3,6 +3,8 @@ package co.unicauca.parcial.service;
 import co.unicauca.parcial.dao.ICourseRepository;
 import co.unicauca.parcial.dao.ISubjectRepository;
 import co.unicauca.parcial.dto.CourseDTO;
+import co.unicauca.parcial.exceptionControllers.exceptions.EntityExistsException;
+import co.unicauca.parcial.exceptionControllers.exceptions.EntityNotExistsException;
 import co.unicauca.parcial.model.Course;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -31,6 +33,10 @@ public class CourseServiceImpl implements ICourseService{
 
     @Override
     public CourseDTO saveCourse(CourseDTO course) {
+
+        if(courseRepository.existsById(course.getCourseId()))
+            throw new EntityExistsException("Curso con id " + course.getCourseId() + " existe en la BD");
+
         Course courseEntity = this.courseMapper.map(course,Course.class);
 
         Course newCourse = this.courseRepository.save(courseEntity);
@@ -65,6 +71,10 @@ public class CourseServiceImpl implements ICourseService{
 
     @Override
     public boolean deleteCourse(String courseId) {
-        return false; //TODO
+        if(!courseRepository.existsById(courseId))
+            throw new EntityNotExistsException("El curso con el id " + courseId + " no existe en la BD");
+        courseRepository.deleteById(courseId);
+
+        return !courseRepository.existsById(courseId);
     }
 }

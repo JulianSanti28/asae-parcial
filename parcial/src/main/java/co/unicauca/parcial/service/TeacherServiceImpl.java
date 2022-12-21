@@ -5,6 +5,7 @@ import co.unicauca.parcial.dao.ITeacherRepository;
 import co.unicauca.parcial.dto.CourseDTO;
 import co.unicauca.parcial.dto.StudentDTO;
 import co.unicauca.parcial.dto.TeacherDTO;
+import co.unicauca.parcial.exceptionControllers.exceptions.EntityExistsException;
 import co.unicauca.parcial.model.Course;
 import co.unicauca.parcial.model.Student;
 import co.unicauca.parcial.model.Teacher;
@@ -28,6 +29,11 @@ public class TeacherServiceImpl implements ITeacherService{
 
     @Override
     public TeacherDTO save(TeacherDTO teacherDTO) {
+
+        if(teacherRepository.buscarDocentePorTipoDeIdentificacionYnumeroDeIdentificacion(teacherDTO.getIdentificationType(), teacherDTO.getIdentificationNumber()).isPresent())
+            throw new EntityExistsException("Docente con id " + teacherDTO.getIdentificationNumber() + " existe en la BD");
+
+
         Teacher teacherEntity = this.teacherMapper.map(teacherDTO,Teacher.class);
 
         Teacher newTeacher = this.teacherRepository.save(teacherEntity);

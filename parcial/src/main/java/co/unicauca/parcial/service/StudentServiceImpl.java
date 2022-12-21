@@ -2,6 +2,9 @@ package co.unicauca.parcial.service;
 
 import co.unicauca.parcial.dao.IStudentRepository;
 import co.unicauca.parcial.dto.StudentDTO;
+import co.unicauca.parcial.exceptionControllers.exceptions.BusinessRuleException;
+import co.unicauca.parcial.exceptionControllers.exceptions.EntityExistsException;
+import co.unicauca.parcial.exceptionControllers.exceptions.StorageErrorDBException;
 import co.unicauca.parcial.model.Address;
 import co.unicauca.parcial.model.Student;
 import co.unicauca.parcial.model.Telephone;
@@ -34,6 +37,17 @@ public class StudentServiceImpl implements IStudentService{
 
     @Override
     public StudentDTO saveStudent(StudentDTO save) {
+        if(studentRepository.buscarEstudiantePorNumeroYTipoIdentificacion
+                        (save.getIdentificationNumber(),save.getIdentificationType()).isPresent()){
+            throw new EntityExistsException("Estudiante con id " + save.getIdentificationNumber() + " existe en la BD");
+        }
+
+        if(studentRepository.buscarEstudiantePorCorreo(save.getEmail()).isPresent())
+            throw new StorageErrorDBException("Estudiante con email " + save.getEmail() + " ya existe en la BD");
+
+        if(save.getAddress() == null || save.getTelephones().size() < 2)
+            throw new BusinessRuleException("El estudiante debe tener una direccion y minimo dos telefonos");
+
         Student toSaveStudent = studentModelMapper.map(save, Student.class);
         toSaveStudent.getAddress().setStudent(toSaveStudent);
         toSaveStudent.getTelephones().forEach(x->x.setStudent(toSaveStudent));
@@ -69,6 +83,10 @@ public class StudentServiceImpl implements IStudentService{
 
     @Override
     public StudentDTO updateStudent(Integer code, StudentDTO update) {
+
+        if(update.getAddress() == null || update.getTelephones().size() < 2)
+            throw new BusinessRuleException("El estudiante debe tener una direccion y minimo dos telefonos");
+
         StudentDTO studentDTO = null;
         if(this.studentRepository.existsById(code)){
             Student student = this.studentRepository.findById(code).get();

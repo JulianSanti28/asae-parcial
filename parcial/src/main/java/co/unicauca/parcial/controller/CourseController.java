@@ -45,5 +45,10 @@ public class CourseController {
 
     }
 
+    @DeleteMapping("{idCurso}")
+    public ResponseEntity<Boolean> deleteById(@PathVariable String idCurso){
+        return new ResponseEntity<>(courseService.deleteCourse(idCurso),HttpStatus.OK);
+    }
+
 
 }

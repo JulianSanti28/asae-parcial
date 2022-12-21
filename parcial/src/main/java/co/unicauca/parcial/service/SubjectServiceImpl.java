@@ -2,6 +2,8 @@ package co.unicauca.parcial.service;
 
 import co.unicauca.parcial.dao.ISubjectRepository;
 import co.unicauca.parcial.dto.SubjectDTO;
+import co.unicauca.parcial.exceptionControllers.exceptions.BusinessRuleException;
+import co.unicauca.parcial.exceptionControllers.exceptions.EntityExistsException;
 import co.unicauca.parcial.model.Course;
 import co.unicauca.parcial.model.Subject;
 import org.modelmapper.ModelMapper;
@@ -30,8 +32,12 @@ public class SubjectServiceImpl implements ISubjectService{
 
     @Override
     public SubjectDTO saveSubject(SubjectDTO subject) {
+        if(subject.getSubjectId() != null)
+            if(this.subjectRepository.existsById(subject.getSubjectId()))
+                throw new EntityExistsException("Asignatura con id " + subject.getSubjectId() + " existe en la BD");
 
-        if (subject.getTeachers().size() < 2 || subject.getCourses().isEmpty()) return null;
+        if (subject.getTeachers().size() < 2 || subject.getCourses().isEmpty())
+            throw new BusinessRuleException("Una asignatura debe tener asociada un curso y minimo un docente");
 
         Subject requestSubject = this.subjectMapper.map(subject, Subject.class);
         requestSubject.getCourses().forEach(course -> {
