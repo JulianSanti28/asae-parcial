@@ -17,6 +17,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements IStudentService{
@@ -95,4 +96,12 @@ public class StudentServiceImpl implements IStudentService{
             return false;
         }
     }
+
+    @Override
+    public List<StudentDTO> findByNameOrLastNameOrEmail(String name, String lastName, String email) {
+        List<Student> students = this.studentRepository.findByNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrEmailContainingIgnoreCase(name, lastName, email);
+        return students.stream().map(x -> this.studentModelMapper.map(x, StudentDTO.class)).collect(Collectors.toList());
+    }
+
+
 }

@@ -70,5 +70,14 @@ public class StudentController {
         return responseEntity;
     }
 
+    @GetMapping("/findLike")
+    public ResponseEntity<?> findStudentsLike(@RequestParam String name, @RequestParam String lastName, @RequestParam String email){
+        List<StudentDTO> studentDTOS = this.studentService.findByNameOrLastNameOrEmail(name, lastName, email);
+
+        if (studentDTOS.isEmpty()) return new ResponseEntity(studentDTOS, HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity(studentDTOS, HttpStatus.OK);
+    }
+
 
 }
