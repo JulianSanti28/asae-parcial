@@ -7,11 +7,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Repository
 public interface IStudentRepository extends CrudRepository<Student,Integer> {
+
+    List<Student> findByNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrEmailContainingIgnoreCase(String name, String lastName, String email);
     //Mediante la notación @Query consultar si existe un estudiante con un correo electrónico.
     //Utilizar la consulta en la validación correspondiente
     @Query("SELECT e From Student e WHERE e.email = :email")
