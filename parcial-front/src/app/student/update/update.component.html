@@ -1,0 +1,89 @@
+<form form [formGroup]="studentForm">
+    <div class="card">
+      <div class="card-header">
+        <h3>Student</h3>
+      </div>
+      <div class="card-body">
+        <label for="code">Code: </label>
+        <input formControlName="code"  type="number" class="form-control" name="code" placeholder="Code" [(ngModel)] = "studentModel.code" readonly>
+          <label for="code">Identification: </label>
+          <br>
+          <select formControlName="identification" class="form-control" [value]="studentModel.identification">
+            <option [selected]="studentModel.identification === 'CEDULA_CIUDADANIA'" value="CEDULA_CIUDADANIA">Cédula de Ciudadanía</option>
+            <option [selected]="studentModel.identification === 'TARJETA_IDENTIDAD'" value="TARJETA_IDENTIDAD">Tarjeta de Identidad</option>
+            <option [selected]="studentModel.identification === 'CEDULA_EXTRANJERIA'" value="CEDULA_EXTRANJERIA">Cédula de Extranjería</option>
+            <option [selected]="studentModel.identification === 'REGISTRO_CIVIL'" value="REGISTRO_CIVIL">Registro Civil</option>
+          </select>
+            <br>
+            <label for="name">Name</label>
+            <input formControlName="name"  type="text" class="form-control" name="name" placeholder="Name" [(ngModel)] = "studentModel.name">
+            <ng-template [ngIf]="name?.getError('maxlength') && (name?.dirty || name?.touched)">
+              <div class="alert alert-danger">
+                  <div class="container-error-message">
+                    The name minimum size is invalid
+                  </div>
+               </div>
+            </ng-template>
+            <ng-template [ngIf]="name?.getError('minlength') && (name?.dirty || name?.touched)">
+              <div class="alert alert-danger">
+                  <div class="container-error-message">
+                      The maximum size of the name is not valid
+                  </div>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="name?.valid && (name?.dirty || name?.touched)">
+              <div class="alert alert-success">
+                  <div class="container-success-message">
+                      Field name is correct!
+                  </div>
+                </div>
+            </ng-template>
+            <br>
+            <label for="lastname">Lastname</label>
+            <input formControlName="lastName" type="text" class="form-control" name="lastName"placeholder="Lastname" [(ngModel)] = "studentModel.lastName">
+            <ng-template [ngIf]="lastName?.getError('maxlength') && (lastName?.dirty || lastName?.touched)">
+              <div class="alert alert-danger">
+                  <div class="container-error-message">
+                    The last name minimum size is invalid
+                  </div>
+               </div>
+            </ng-template>
+            <ng-template [ngIf]="lastName?.getError('minlength') && (lastName?.dirty || lastName?.touched)">
+              <div class="alert alert-danger">
+                  <div class="container-error-message">
+                      The maximum size of the last name is not valid
+                  </div>
+                </div>
+            </ng-template>
+            <ng-template [ngIf]="lastName?.valid && (lastName?.dirty || lastName?.touched)">
+              <div class="alert alert-success">
+                  <div class="container-success-message">
+                      Field last name is correct!
+                  </div>
+                </div>
+            </ng-template>
+            <br>
+            <label for="lastname">Email</label>
+            <input formControlName="email" type="text" class="form-control" name="email" placeholder="Email" [(ngModel)] = "studentModel.email">
+            <ng-template [ngIf]="email?.getError('pattern') && (email?.dirty || email?.touched)">
+                <div class="alert alert-danger">
+                    <div class="container-error-message">
+                      The email is invalid
+                    </div>
+                 </div>
+            </ng-template>
+            <ng-template [ngIf]="email?.valid && (email?.dirty || email?.touched)">
+                <div class="alert alert-success">
+                    <div class="container-success-message">
+                        Field email is correct!
+                    </div>
+                  </div>
+              </ng-template>
+            <br>
+            <input type="submit" class="btn btn-info" value="Add">        
+        </div>
+    </div>
+  </form>
+  <br>
+  <br>
+
