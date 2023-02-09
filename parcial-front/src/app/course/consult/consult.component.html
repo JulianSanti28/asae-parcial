@@ -4,9 +4,10 @@
   <div class="card-header">
     Consult course
   </div>
+  <div *ngIf="course!=null">
   <div class="card-body">
-    <mat-accordion >
-      <mat-expansion-panel hideToggle>
+    <mat-accordion class="accordion-headers" multi>
+      <mat-expansion-panel hideToggle="false" class="acordeon">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Course
@@ -16,20 +17,42 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="card">
-          <div class="card-body row g-4">
-            <mat-list role="list">
-              <mat-list-item role="listitem">Id:    {{course.courseId}}</mat-list-item>
-              <mat-list-item role="listitem">name</mat-list-item>
-              <mat-list-item role="listitem">Period</mat-list-item>
-            </mat-list>
-          </div>
+        <app-course-view [course]="course">
 
+        </app-course-view>
 
-        </div>
 
       </mat-expansion-panel>
 
+      <mat-expansion-panel hideToggle="false" class="acordeon">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Subject
+          </mat-panel-title>
+          <mat-panel-description>
+            Informacion Asignatura
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+            <app-subject [subject]="subject">
+
+            </app-subject>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle="false" class="acordeon">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Teachers
+          </mat-panel-title>
+          <mat-panel-description>
+            Lista de Profesores
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+            <app-teacher [teachers]="teachers">
+
+            </app-teacher>
+      </mat-expansion-panel>
+
     </mat-accordion>
+  </div>
   </div>
 </div>

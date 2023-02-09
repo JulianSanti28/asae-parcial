@@ -5,7 +5,7 @@ export class SubjectDTO{
   subjectId !: number;
   name?:string;
   courses ?: CourseDTO[];
-  teachers ?:TeacherDTO [];
+  teachers !:TeacherDTO [];
 
   constructor(){
 

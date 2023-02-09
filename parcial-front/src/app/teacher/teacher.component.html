@@ -1,0 +1,27 @@
+<div class="card text-white bg-primary mb-3">
+  <diV class="card-body">
+    <h5 class="card-title">List of teachers</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Identification</th>
+            <th>name</th>
+            <th>lastName</th>
+            <th>university</th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr *ngFor="let teacher of teachers">
+            <td>{{teacher.idPerson}}</td>
+            <td>{{teacher.identificationType}}</td>
+            <td>{{teacher.identificationNumber}}</td>
+            <td>{{teacher.name}}</td>
+            <td>{{teacher.lastName}}</td>
+            <td>{{teacher.university}}</td>
+          </tr>
+        </tbody>
+    </table>
+  </diV>
+</div>

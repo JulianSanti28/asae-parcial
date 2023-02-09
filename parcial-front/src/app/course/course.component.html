@@ -1,5 +1,5 @@
 <div class="card text-white mb-3">
-  <div class="card-header">Students</div>
+  <div class="card-header">Course</div>
   <div class="card-body">
     <h5 class="card-title">List of Course</h5>
     <div class="my-2 text-left">
@@ -38,10 +38,10 @@
         <label for="staticEmail2" class="visually-hidden">Curso</label>
       </div>
       <div class="col-auto">
-        <input type="text" class="form-control" id="courseId" placeholder="id">
+        <input type="text" class="form-control" [(ngModel)]="courseId" placeholder="id">
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3" [routerLink]="['/course/consult']">
+        <button type="submit" class="btn btn-primary mb-3" [routerLink]="['/course/consult/', courseId]">
           Consultar
         </button>
       </div>

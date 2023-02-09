@@ -1,1 +1,26 @@
 
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.accordion-headers .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-headers .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.acordeon{
+  margin-top: 10px;
+  border-radius: 16px 16px 16px 16px;
+  -moz-border-radius: 16px 16px 16px 16px;
+  -webkit-border-radius: 16px 16px 16px 16px;
+  border: 3px solid #faf7fa;
+  background-color: white;
+}
+
+.card{
+  background-color: lightskyblue;
+}

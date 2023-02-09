@@ -19,6 +19,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list';
+import { TeacherComponent } from './teacher/teacher.component';
+import { SubjectComponent } from './subject/subject.component';
+import { CourseViewComponent } from './course/course-view/course-view.component';
 
 
 
@@ -30,7 +33,7 @@ const routes: Routes = [
   { path: 'students/details', component: UpdateComponent },
   { path: 'course', component: CourseComponent },
   { path: 'course/form', component: FormComponent },
-  { path: 'course/consult', component: ConsultComponent },
+  { path: 'course/consult/:courseId', component: ConsultComponent },
 
 
 ];
@@ -46,6 +49,9 @@ const routes: Routes = [
     CourseComponent,
     FormComponent,
     ConsultComponent,
+    TeacherComponent,
+    SubjectComponent,
+    CourseViewComponent,
 
   ],
   imports: [

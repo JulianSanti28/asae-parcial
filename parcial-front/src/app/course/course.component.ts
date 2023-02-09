@@ -14,6 +14,7 @@ export class CourseComponent implements OnInit{
   constructor(private courseService:CourseService,private router: Router) { }
 
   courses : CourseDTO[] = [];
+  courseId !: string;
 
   ngOnInit(): void {
     this.getAllCourses();
