@@ -18,7 +18,7 @@ export class StudentService {
     this.errors = [];
    }
 
-   saveStudent(student: StudentDTO) {
+  saveStudent(student: StudentDTO) {
     return this.httpClient.post<StudentDTO>(this.urlPath, student).pipe(
       catchError((err: HttpErrorResponse) => {
         this.errors = err.error;
@@ -36,7 +36,7 @@ export class StudentService {
     );
   }
   findAllStudent(){
-    return this.httpClient.get<Student[]>(this.urlPath).pipe(
+    return this.httpClient.get<StudentDTO[]>(this.urlPath).pipe(
       catchError(err => {
         return throwError(err);
       })

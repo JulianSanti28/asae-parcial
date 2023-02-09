@@ -37,22 +37,21 @@ export class CreateComponent implements OnInit {
       ]),
       entryDate: new FormControl(''),
       address: new FormGroup({
-        ubication: new FormControl('', [Validators.required, Validators.minLength(3)])
+        ubication: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(25)])
       }),
       telephones: new FormArray([new FormGroup({
-        type: new FormControl('', [Validators.required, Validators.minLength(3)]),
-        number: new FormControl('', [Validators.required, Validators.minLength(7)])
+        type: new FormControl('', [Validators.required, Validators.minLength(4)]),
+        number: new FormControl('', [Validators.required, Validators.pattern('^8[0-9]{5,20}$')])
       })])
     });
   }
 
   saveStudent() {
-    
     Object.assign(this.studentModel, this.studentForm.value);
     console.log(this.studentModel)
     this.studentService.saveStudent(this.studentModel).subscribe(response => {
-      //this.router.navigate(['/students']);
       swal.fire('Estudiante registrado!', `Estudiante ${response.name} ha sido creado!`, 'success');
+      this.router.navigate(['/students']);
     },
       err => {
         swal.fire('Cancelado!', `${err.error} !`, 'error');

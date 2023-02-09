@@ -88,13 +88,34 @@
         <label>Dirección:</label>
         <input type="text" formControlName="ubication" placeholder="Ubicación" class="form-control" />
       </div>
+      <ng-template [ngIf]="address?.get('ubication')?.hasError('minlength') && (address?.get('ubication')?.dirty || address?.get('ubication')?.touched)">
+        <div class="alert alert-danger">
+          <div class="container-error-message">
+            El campo no supera la longitud mínima
+          </div>
+        </div>
+      </ng-template>
       <div class="form-group card-header bg-dark-opacity" formArrayName="telephones">
         <div *ngFor="let phone of telephones.controls; let i = index">
           <div class="form-group" [formGroupName]="i">
             <label>Tipo:</label>
             <input type="text" formControlName="type" class="form-control" />
+            <ng-template [ngIf]="phone?.get('type')?.hasError('minlength') && (phone.get('type')?.dirty || phone?.get('type')?.touched)">
+              <div class="alert alert-danger">
+                <div class="container-error-message">
+                  El tipo de teléfono no supera la longitud mínima
+                </div>
+              </div>
+            </ng-template>
             <label>Número:</label>
-            <input type="text" formControlName="number" class="form-control" />
+            <input type="number" formControlName="number" class="form-control" />
+            <ng-template [ngIf]="phone?.get('number')?.hasError('pattern') && (phone.get('number')?.dirty || phone?.get('number')?.touched)">
+              <div class="alert alert-danger">
+                <div class="container-error-message">
+                  El número no cumple con las especificaciones dadas
+                </div>
+              </div>
+            </ng-template>
             <br>
             <button (click)="removePhone(i)" class="btn btn-danger">Eliminar</button>
           </div>

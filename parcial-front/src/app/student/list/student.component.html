@@ -14,20 +14,27 @@
       <table class="table table-bordered table-striped" *ngIf="students.length>0"> 
         <thead>
             <tr>
-                <th>Code</th>
-                <th>Identification</th>
-                <th>Name</th>
-                <th>Lastname</th>
+                <th>Identificacion</th>
+                <th>Tipo ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
                 <th>Email</th>
+                <th>Direccion</th>
+                <th>Telefonos</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let student of students">
-                <td>{{student.code}}</td>
-                <td>{{student.identification}}</td>
+                <td>{{student.identificationNumber}}</td>
+                <td>{{student.identificationType}}</td>
                 <td>{{student.name}}</td>
                 <td>{{student.lastName}}</td>
                 <td>{{student.email}}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let telephone of student.telephones">{{telephone.type}} - {{telephone.number}}</li>
+                  </ul>
+                </td>
                 <td><button class="btn btn-info" (click)="editar(student)">Edit</button></td>
                 <td><button class="btn btn-danger"(click)="eliminar(student)">Remove</button></td>
             </tr> 
