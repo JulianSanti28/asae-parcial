@@ -34,11 +34,11 @@ public class CourseController {
     }
 
     @GetMapping("{idCurso}")
-    public ResponseEntity<CourseDTO> findById(@Min(0) @PathVariable String idCurso) {
+    public ResponseEntity<CourseDTO> findById( @PathVariable String idCurso) {
         Optional<CourseDTO> course = courseService.getCourseById(idCurso);
 
         if (course.isPresent()){
-            return new ResponseEntity<>(course.get(), HttpStatus.FOUND);
+            return new ResponseEntity<>(course.get(), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
