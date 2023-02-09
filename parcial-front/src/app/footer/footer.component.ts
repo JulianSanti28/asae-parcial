@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class FooterComponent {
   public proyecto: any = {anio: '2022', nombreProyecto: 'Students Project'};
   public tecnologia: any = {leyenda: 'Development ', tec1: 'Angular ', tec2: 'Spring Boot'};
-  public autor: string = 'Julián S Martinez';
+  public autor: string = '';
 }
