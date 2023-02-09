@@ -21,6 +21,8 @@
                 <th>Email</th>
                 <th>Direccion</th>
                 <th>Telefonos</th>
+                <th>Detalles</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -30,13 +32,15 @@
                 <td>{{student.name}}</td>
                 <td>{{student.lastName}}</td>
                 <td>{{student.email}}</td>
+                <td>{{student.address.ubication}}</td>
                 <td>
                   <ul>
                     <li *ngFor="let telephone of student.telephones">{{telephone.type}} - {{telephone.number}}</li>
                   </ul>
                 </td>
-                <td><button class="btn btn-info" (click)="editar(student)">Edit</button></td>
-                <td><button class="btn btn-danger"(click)="eliminar(student)">Remove</button></td>
+                
+                <td><button class="btn btn-info" (click)="editar(student)">Ver</button></td>
+                <td><button class="btn btn-danger"(click)="eliminar(student)">Eliminar</button></td>
             </tr> 
         </tbody>
       </table>

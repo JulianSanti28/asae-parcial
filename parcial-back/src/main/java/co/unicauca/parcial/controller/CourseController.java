@@ -16,10 +16,14 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/course")
 @Validated
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class CourseController {
 
-    @Autowired
-    private ICourseService courseService;
+    private final ICourseService courseService;
+
+    public CourseController(ICourseService courseService) {
+        this.courseService = courseService;
+    }
 
     @PostMapping
     public CourseDTO create(@Valid @RequestBody CourseDTO course){

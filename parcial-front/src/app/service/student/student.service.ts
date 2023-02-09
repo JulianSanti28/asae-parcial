@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Student } from '../../model/student';
 import { StudentDTO } from '../../model/StudentDTO';
 import { Response } from '../../model/response';
-
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -27,8 +25,8 @@ export class StudentService {
     );
   }
 
-  updateStudent(student: Student) {
-    return this.httpClient.put<Student>(`${this.urlPath}?id=${student.code}`, student).pipe(
+  updateStudent(student: StudentDTO) {
+    return this.httpClient.put<StudentDTO>(`${this.urlPath}?id=${student.idPerson}`, student).pipe(
       catchError((err: HttpErrorResponse) => {
         this.errors = err.error;
         return throwError(err);
@@ -44,7 +42,7 @@ export class StudentService {
   }
 
   findStudentById(code: number){
-    return this.httpClient.get<Student>(`${this.urlPath}/${code}`, { observe: 'response' });
+    return this.httpClient.get<StudentDTO>(`${this.urlPath}/${code}`, { observe: 'response' });
   }
 
   removeStudent(code: number) {

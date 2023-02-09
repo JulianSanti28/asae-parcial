@@ -1,89 +1,189 @@
-<form form [formGroup]="studentForm">
-    <div class="card">
-      <div class="card-header">
-        <h3>Student</h3>
+<div class="card card-sm mb-3">
+  <div class="card-header">
+    Formulario de Alumno
+  </div>
+  <div class="card-body">
+    <form [formGroup]="studentForm">
+      <div class="form-group">
+        <label>Número de Identificación:</label>
+        <input type="number" formControlName="identificationNumber" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="identificationNumber?.getError('required') && (identificationNumber?.dirty || identificationNumber?.touched)" [value]="studentModel.identificationNumber">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo número de identificación es requerido
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="identificationNumber?.valid && (identificationNumber?.dirty || identificationNumber?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                Numero de identificación es correcto!
+              </div>
+            </div>
+        </ng-template>
       </div>
-      <div class="card-body">
-        <label for="code">Code: </label>
-        <input formControlName="code"  type="number" class="form-control" name="code" placeholder="Code" [(ngModel)] = "studentModel.code" readonly>
-          <label for="code">Identification: </label>
-          <br>
-          <select formControlName="identification" class="form-control" [value]="studentModel.identification">
-            <option [selected]="studentModel.identification === 'CEDULA_CIUDADANIA'" value="CEDULA_CIUDADANIA">Cédula de Ciudadanía</option>
-            <option [selected]="studentModel.identification === 'TARJETA_IDENTIDAD'" value="TARJETA_IDENTIDAD">Tarjeta de Identidad</option>
-            <option [selected]="studentModel.identification === 'CEDULA_EXTRANJERIA'" value="CEDULA_EXTRANJERIA">Cédula de Extranjería</option>
-            <option [selected]="studentModel.identification === 'REGISTRO_CIVIL'" value="REGISTRO_CIVIL">Registro Civil</option>
-          </select>
-            <br>
-            <label for="name">Name</label>
-            <input formControlName="name"  type="text" class="form-control" name="name" placeholder="Name" [(ngModel)] = "studentModel.name">
-            <ng-template [ngIf]="name?.getError('maxlength') && (name?.dirty || name?.touched)">
+      <div class="form-group">
+        <label>Tipo de Identificación:</label>
+        <input type="text" formControlName="identificationType" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="identificationType?.getError('minlength') && (identificationType?.dirty || identificationType?.touched)" [value]="studentModel.identificationType">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo tipo de identificacion no cumple la longitud mínima
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="identificationType?.valid && (identificationType?.dirty || identificationType?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                El campo tipo de identificacion es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Fecha Ingreso:</label>
+        <input type="date" formControlName="entryDate" class="form-control" [value]="studentModel.entryDate"/>
+      </div>
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input type="text" formControlName="name" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="name?.getError('maxlength') && (name?.dirty || name?.touched)" [value]="studentModel.name">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo nombre no cumple la longitud mínima
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="name?.getError('minlength') && (name?.dirty || name?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo nombre no cumple la longitud maxima
+              </div>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="name?.valid && (name?.dirty || name?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                Campo nombre es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Apellido:</label>
+        <input type="text" formControlName="lastName" class="form-control" [value]="studentModel.lastName" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="lastName?.getError('maxlength') && (lastName?.dirty || lastName?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                  El campo no supera la longitud mínima
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="lastName?.getError('minlength') && (lastName?.dirty || lastName?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                  El campo supera la longitud máxima
+              </div>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="lastName?.valid && (lastName?.dirty || lastName?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                  Campo apellido es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" formControlName="email" class="form-control" [value]="studentModel.email"/>
+        <!--Validaciones-->
+        <ng-template [ngIf]="email?.getError('pattern') && (email?.dirty || email?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                Email Inválido
+              </div>
+           </div>
+      </ng-template>
+      <ng-template [ngIf]="email?.valid && (email?.dirty || email?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                  Email Correcto!
+              </div>
+            </div>
+      </ng-template>
+      </div>
+      <div class="form-group" formGroupName="address">
+        <label>Dirección:</label>
+        <input type="text" formControlName="ubication" placeholder="Ubicación" class="form-control" [value]="studentModel.address.ubication"/>
+        <!--Validaciones-->
+        <ng-template [ngIf]="address?.get('ubication')?.hasError('minlength') && (address?.get('ubication')?.dirty || address?.get('ubication')?.touched)">
+          <div class="alert alert-danger">
+            <div class="container-error-message">
+              El campo no supera la longitud mínima
+            </div>
+          </div>
+        </ng-template>
+        <ng-template [ngIf]="address?.get('ubication')?.valid && (address?.get('ubication')?.dirty || address?.get('ubication')?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                  Dirección correcta!
+              </div>
+            </div>
+       </ng-template>
+      </div>
+      <div class="form-group card-header bg-dark-opacity" formArrayName="telephones">
+        <div *ngFor="let phone of telephones.controls; let i = index">
+          <div class="form-group" [formGroupName]="i">
+            <label>Tipo:</label>
+            <input type="text" formControlName="type" class="form-control" />
+            <ng-template [ngIf]="phone?.get('type')?.hasError('minlength') && (phone.get('type')?.dirty || phone?.get('type')?.touched)">
               <div class="alert alert-danger">
-                  <div class="container-error-message">
-                    The name minimum size is invalid
-                  </div>
-               </div>
-            </ng-template>
-            <ng-template [ngIf]="name?.getError('minlength') && (name?.dirty || name?.touched)">
-              <div class="alert alert-danger">
-                  <div class="container-error-message">
-                      The maximum size of the name is not valid
-                  </div>
+                <div class="container-error-message">
+                  El tipo de teléfono no supera la longitud mínima
                 </div>
+              </div>
             </ng-template>
-            <ng-template [ngIf]="name?.valid && (name?.dirty || name?.touched)">
+            <ng-template [ngIf]="phone?.get('type')?.valid && (phone.get('type')?.dirty || phone?.get('type')?.touched)">
               <div class="alert alert-success">
                   <div class="container-success-message">
-                      Field name is correct!
+                      Tipo de teléfono correcto!
                   </div>
                 </div>
-            </ng-template>
-            <br>
-            <label for="lastname">Lastname</label>
-            <input formControlName="lastName" type="text" class="form-control" name="lastName"placeholder="Lastname" [(ngModel)] = "studentModel.lastName">
-            <ng-template [ngIf]="lastName?.getError('maxlength') && (lastName?.dirty || lastName?.touched)">
+           </ng-template>
+            <label>Número:</label>
+            <input type="number" formControlName="number" class="form-control" />
+            <ng-template [ngIf]="phone?.get('number')?.hasError('pattern') && (phone.get('number')?.dirty || phone?.get('number')?.touched)">
               <div class="alert alert-danger">
-                  <div class="container-error-message">
-                    The last name minimum size is invalid
-                  </div>
-               </div>
-            </ng-template>
-            <ng-template [ngIf]="lastName?.getError('minlength') && (lastName?.dirty || lastName?.touched)">
-              <div class="alert alert-danger">
-                  <div class="container-error-message">
-                      The maximum size of the last name is not valid
-                  </div>
+                <div class="container-error-message">
+                  El número no cumple con las especificaciones dadas
                 </div>
+              </div>
             </ng-template>
-            <ng-template [ngIf]="lastName?.valid && (lastName?.dirty || lastName?.touched)">
+            <ng-template [ngIf]="phone?.get('number')?.valid && (phone.get('number')?.dirty || phone?.get('number')?.touched)">
               <div class="alert alert-success">
                   <div class="container-success-message">
-                      Field last name is correct!
+                      Número correcto!
                   </div>
                 </div>
-            </ng-template>
+           </ng-template>
             <br>
-            <label for="lastname">Email</label>
-            <input formControlName="email" type="text" class="form-control" name="email" placeholder="Email" [(ngModel)] = "studentModel.email">
-            <ng-template [ngIf]="email?.getError('pattern') && (email?.dirty || email?.touched)">
-                <div class="alert alert-danger">
-                    <div class="container-error-message">
-                      The email is invalid
-                    </div>
-                 </div>
-            </ng-template>
-            <ng-template [ngIf]="email?.valid && (email?.dirty || email?.touched)">
-                <div class="alert alert-success">
-                    <div class="container-success-message">
-                        Field email is correct!
-                    </div>
-                  </div>
-              </ng-template>
-            <br>
-            <input type="submit" class="btn btn-info" value="Add">        
+            <button (click)="removePhone(i)" class="btn btn-danger">Eliminar</button>
+          </div>
         </div>
-    </div>
-  </form>
-  <br>
-  <br>
+      </div>
+      <br>
+      <button (click)="addPhone()" class="btn btn-warning">Agregar Teléfono</button>
+      <br><br>
+      <button type="submit" (click)="saveStudent()" class="btn btn-info">Enviar</button><span> Ó </span>
+      <button type="button" class="btn btn-secondary active" (click)="goBack()">Cancelar</button>
+    </form>
+  </div>
+</div>
+
+
 

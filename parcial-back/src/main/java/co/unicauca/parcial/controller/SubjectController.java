@@ -15,10 +15,14 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/subject")
 @Validated
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class SubjectController {
 
-    @Autowired
-    private ISubjectService subjectService;
+    private final ISubjectService subjectService;
+
+    public SubjectController(ISubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
 
     @GetMapping
     public List<SubjectDTO> findAll(){

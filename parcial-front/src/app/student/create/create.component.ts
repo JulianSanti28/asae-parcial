@@ -28,7 +28,7 @@ export class CreateComponent implements OnInit {
   createFormStudent() {
     return new FormGroup({
       identificationNumber: new FormControl('', [Validators.required]),
-      identificationType: new FormControl('', [Validators.required]),
+      identificationType: new FormControl('', [Validators.required,Validators.minLength(2)]),
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
       email: new FormControl('', [
@@ -39,10 +39,7 @@ export class CreateComponent implements OnInit {
       address: new FormGroup({
         ubication: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(25)])
       }),
-      telephones: new FormArray([new FormGroup({
-        type: new FormControl('', [Validators.required, Validators.minLength(4)]),
-        number: new FormControl('', [Validators.required, Validators.pattern('^8[0-9]{5,20}$')])
-      })])
+      telephones: new FormArray([])
     });
   }
 
@@ -66,8 +63,8 @@ export class CreateComponent implements OnInit {
 
   addPhone() {
     this.telephones.push(new FormGroup({
-      type: new FormControl(''),
-      number: new FormControl('')
+      type: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      number: new FormControl('', [Validators.required, Validators.pattern('^8[0-9]{5,20}$')])
     }));
   }
 
