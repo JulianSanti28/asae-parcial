@@ -11,7 +11,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class StudentService {
-  urlPath = 'http://localhost:8081/api/student';
+  urlPath = 'api/student';
   errors: string[];
 
   constructor(private httpClient: HttpClient) {

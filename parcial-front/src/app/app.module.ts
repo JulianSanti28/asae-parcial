@@ -14,7 +14,11 @@ import { CourseComponent } from './course/course.component';
 import {MatIconModule} from '@angular/material/icon';
 import { FormComponent } from './course/form/form.component';
 import {MatSelectModule} from '@angular/material/select';
-
+import { ConsultComponent } from './course/consult/consult.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import {MatListModule} from '@angular/material/list';
 
 
 
@@ -26,6 +30,8 @@ const routes: Routes = [
   { path: 'students/details', component: UpdateComponent },
   { path: 'course', component: CourseComponent },
   { path: 'course/form', component: FormComponent },
+  { path: 'course/consult', component: ConsultComponent },
+
 
 ];
 
@@ -39,6 +45,8 @@ const routes: Routes = [
     UpdateComponent,
     CourseComponent,
     FormComponent,
+    ConsultComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatIconModule,
     MatSelectModule,
-
+    MatExpansionModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

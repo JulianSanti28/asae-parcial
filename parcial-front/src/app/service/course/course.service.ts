@@ -48,8 +48,8 @@ export class CourseService {
     )
   }
 
-  getCourseByID(id:number):Observable<CourseDTO>{
-    return this.http.get<CourseDTO>(this.endPoint+"?"+"id="+id).pipe(
+  getCourseByID(id:string):Observable<CourseDTO>{
+    return this.http.get<CourseDTO>(this.endPoint+"/"+id).pipe(
       catchError( (e) => {
         console.log('Error obteniendo el curso', e.error.mensaje, 'error');
         return throwError(e);
