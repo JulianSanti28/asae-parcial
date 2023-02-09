@@ -10,6 +10,12 @@ import { CreateComponent } from './student/create/create.component';
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import { UpdateComponent } from './student/update/update.component';
+import { CourseComponent } from './course/course.component';
+import {MatIconModule} from '@angular/material/icon';
+import { FormComponent } from './course/form/form.component';
+import {MatSelectModule} from '@angular/material/select';
+
+
 
 
 
@@ -17,7 +23,9 @@ const routes: Routes = [
   { path: '', redirectTo: '/students', pathMatch: 'full' },
   { path: 'students/form', component: CreateComponent },
   { path: 'students', component: StudentComponent },
-  { path: 'students/details', component: UpdateComponent }
+  { path: 'students/details', component: UpdateComponent },
+  { path: 'course', component: CourseComponent },
+  { path: 'course/form', component: FormComponent },
 
 ];
 
@@ -28,14 +36,19 @@ const routes: Routes = [
     HeaderComponent,
     StudentComponent,
     CreateComponent,
-    UpdateComponent
+    UpdateComponent,
+    CourseComponent,
+    FormComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatSelectModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

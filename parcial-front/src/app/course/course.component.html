@@ -1,0 +1,37 @@
+<div class="card text-white mb-3">
+  <div class="card-header">Students</div>
+  <div class="card-body">
+    <h5 class="card-title">List of Students</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-warning" type="button" [routerLink]="['/course/form']">
+        Create Course
+      </button>
+    </div>
+    <div *ngIf="courses?.length==0" class="alert alert-info" >
+        No Course found in the database
+    </div>
+
+    <table class="table table-bordered table-striped" *ngIf="courses.length>0">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Period</th>
+              <th>Subject</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses">
+          <td>{{course.courseId}}</td>
+          <td>{{course.name}}</td>
+          <td>{{course.period}}</td>
+          <td>{{course.subject.name}}</td>
+          <a (click)="delete(course.courseId)">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
