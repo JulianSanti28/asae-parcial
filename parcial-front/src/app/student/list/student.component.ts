@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StudentService } from 'src/app/service/student/student.service';
-import { Student } from '../../model/student';
 import swal from 'sweetalert2';
 import { StudentDTO } from 'src/app/model/StudentDTO';
 

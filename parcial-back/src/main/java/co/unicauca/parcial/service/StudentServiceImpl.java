@@ -87,18 +87,15 @@ public class StudentServiceImpl implements IStudentService{
 
         if(update.getAddress() == null || update.getTelephones().size() < 2)
             throw new BusinessRuleException("El estudiante debe tener una direccion y minimo dos telefonos");
-
         StudentDTO studentDTO = null;
         if(this.studentRepository.existsById(code)){
-            Student student = this.studentRepository.findById(code).get();
+            Student student;
             student = studentModelMapper.map(update,Student.class);
             student.getAddress().setIdStudent(code);
 
             for (Telephone t:student.getTelephones()){
                 t.setStudent(student);
             }
-
-
             studentDTO = studentModelMapper.map(this.studentRepository.save(student),StudentDTO.class);
         }
         return studentDTO;

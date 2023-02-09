@@ -13,9 +13,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/teacher")
 @Validated
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class TeacherController {
-    @Autowired
-    private ITeacherService teacherService;
+    private final ITeacherService teacherService;
+
+    public TeacherController(ITeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
 
     @GetMapping
     public List<TeacherDTO> findAll(){

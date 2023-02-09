@@ -12,11 +12,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/student")
 @Validated
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class StudentController {
 
     private final IStudentService studentService;
@@ -35,12 +38,20 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<List<StudentDTO>> findAllStudent(){
         List<StudentDTO> students = this.studentService.findAllStudent();
-        return students.isEmpty() ? ResponseEntity.status(HttpStatus.NO_CONTENT).body(new ArrayList<>()) : ResponseEntity.status(HttpStatus.FOUND).body(students);
+        return ResponseEntity.status(HttpStatus.OK).body(students);
     }
     @DeleteMapping
     public ResponseEntity<?> deleteStudent(@RequestParam(name = "id") Integer id){
         Boolean isDeleted = this.studentService.deleteStudent(id);
-        return !isDeleted ? ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al eliminar el estudiante") : ResponseEntity.status(HttpStatus.OK).body("Estudiante eliminado exitosamente");
+        Map<String, String> response = new HashMap<>();
+        if (!isDeleted) {
+            response.put("message", "Error al eliminar el estudiante");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        } else {
+            response.put("message", "Estudiante eliminado exitosamente");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+
     }
 
     @GetMapping("/{id}")
