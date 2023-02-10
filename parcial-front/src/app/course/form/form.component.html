@@ -5,23 +5,64 @@
   </div>
   <div class="card-body">
     <form [formGroup]="courseForm">
+
       <div class="form-group">
         <label>Id:</label>
-        <input type="text" formControlName="courseId" class="form-control" />
+        <input type="text" formControlName="courseId" class="form-control" >
+
+        <div class="alert alert-danger" *ngIf="this.id?.invalid && (this.id?.dirty || this.id?.touched)">
+          <div *ngIf="this.id?.errors?.['required']">
+            Id es requerido
+          </div>
+        </div>
+
       </div>
+
       <div class="form-group">
         <label>Nombre:</label>
         <input type="text" formControlName="name" class="form-control" />
+
+        <div class="alert alert-danger" *ngIf="this.name?.invalid && (this.name?.dirty || this.name?.touched)">
+          <div *ngIf="this.name?.errors?.['required']">
+            nombre es requerido
+          </div>
+          <div *ngIf="this.name?.errors?.['minlength']">
+            La longitud minima es de 5
+          </div>
+          <div *ngIf="this.name?.errors?.['maxlength']">
+            La longitud Maxima es de 25
+          </div>
+        </div>
+
       </div>
+
+
       <div class="form-group">
         <label>Periodo:</label>
         <input type="text" formControlName="period" class="form-control" />
+        <div class="alert alert-danger" *ngIf="this.period?.invalid && (this.period?.dirty || this.period?.touched)">
+          <div *ngIf="this.period?.errors?.['required']">
+            Periodo es requerido
+          </div>
+          <div *ngIf="this.period?.errors?.['minlength']">
+            La longitud minima es de 1
+          </div>
+          <div *ngIf="this.period?.errors?.['maxlength']">
+            La longitud Maxima es de 2
+          </div>
+        </div>
+
       </div>
       <div class="form-group">
         <label>Codigo Asignatura:</label>
         <input type="number" formControlName="subjectID" class="form-control" />
+        <div class="alert alert-danger" *ngIf="this.subjectID?.invalid && (this.subjectID?.dirty || this.subjectID?.touched)">
+          <div *ngIf="this.subjectID?.errors?.['required']">
+            El codigo de la asignatura es requerido
+          </div>
+        </div>
       </div>
-      <button type="submit" (click)="saveCourse()" class="btn btn-info">Guardar</button>
+      <button type="submit" (click)="saveCourse()" class="btn btn-info" [disabled]="courseForm.invalid">Guardar</button>
     </form>
 
 

@@ -35,13 +35,21 @@
     </table>
     <div class="row g-3">
       <div class="col-auto">
-        <label for="staticEmail2" class="visually-hidden">Curso</label>
+        <label for="staticEmail2" class="visually-hidden">Buscar Curso</label>
       </div>
       <div class="col-auto">
-        <input type="text" class="form-control" [(ngModel)]="courseId" placeholder="id">
+        <input type="text" class="form-control" [(ngModel)]="courseId" placeholder="id" required minlength="2" #idCourse="ngModel">
+        <div class="alert alert-danger" *ngIf="idCourse.invalid && (idCourse.dirty || idCourse.touched)">
+          <div *ngIf="idCourse.errors?.['required']">
+            El id del curso es necesario
+          </div>
+          <div *ngIf="idCourse.errors?.['minlength']">
+            La longitud minima es 2
+          </div>
+        </div>
       </div>
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3" [routerLink]="['/course/consult/', courseId]">
+      <div class="col-auto" *ngIf="idCourse.errors == null">
+        <button type="submit" class="btn btn-primary mb-3" [routerLink]="['/course/consult/', courseId] "  >
           Consultar
         </button>
       </div>

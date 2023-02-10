@@ -37,6 +37,9 @@ public class CourseServiceImpl implements ICourseService{
         if(courseRepository.existsById(course.getCourseId()))
             throw new EntityExistsException("Curso con id " + course.getCourseId() + " existe en la BD");
 
+        if(!subjectRepository.existsById(course.getSubject().getSubjectId()))
+            throw new EntityExistsException("subject con id " + course.getSubject().getSubjectId() + " NO existe en la BD");
+
         Course courseEntity = this.courseMapper.map(course,Course.class);
 
         Course newCourse = this.courseRepository.save(courseEntity);

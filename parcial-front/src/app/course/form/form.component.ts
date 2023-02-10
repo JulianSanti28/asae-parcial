@@ -8,7 +8,7 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html',
+  templateUrl: './form2.component.html',
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit{
@@ -20,7 +20,7 @@ export class FormComponent implements OnInit{
     this.courseForm = this.createFormCourse();
   }
   ngOnInit(): void {
-
+    console.log()
 
   }
 
@@ -44,6 +44,7 @@ export class FormComponent implements OnInit{
       err => {
        console.log(err.error)
        this.errores = err.error as string [];
+       console.log("aqui",this.errores)
        console.error('codigo del error desde el backend: '+ err.status);
       }
     );
