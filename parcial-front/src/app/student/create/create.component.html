@@ -44,7 +44,18 @@
       </div>
       <div class="form-group">
         <label>Fecha Ingreso:</label>
-        <input type="date" formControlName="entryDate" class="form-control" />
+        <input type="date" formControlName="entryDate" class="form-control"/>
+        <div class="alert alert-danger" *ngIf="this.entryDate?.invalid && (this.entryDate?.dirty || this.entryDate?.touched)">
+          <div *ngIf="this.entryDate?.errors?.['required']">
+            La fecha  es requerido
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="futureDate()">
+          <div class="container-error-message">
+            Fecha en el futuro
+          </div>
+       </div>
+
       </div>
       <div class="form-group">
         <label>Nombre:</label>
@@ -174,12 +185,22 @@
             <br>
             <button (click)="removePhone(i)" class="btn btn-danger">Eliminar</button>
           </div>
+          <div class="alert alert-danger" *ngIf="telephones.length < 2">
+            <div *ngIf="this.name?.errors?.['required']">
+              Se deben registrar minimo 2 telefonos
+            </div>
+          </div>
+
+
         </div>
       </div>
       <br>
-      <button (click)="addPhone()" class="btn btn-warning">Agregar Teléfono</button>
-      <br><br>
-      <button type="submit" (click)="saveStudent()" class="btn btn-info">Enviar</button>
+      <div class="form-group">
+        <button (click)="addPhone()" class="btn btn-warning">Agregar Teléfono</button>
+      </div>
+      <div class="form-group">
+        <button type="submit" (click)="saveStudent()" class="btn btn-info"  [disabled]="studentForm.invalid||telephones.length<2||futureDate()" >Enviar</button>
+      </div>
     </form>
   </div>
 </div>

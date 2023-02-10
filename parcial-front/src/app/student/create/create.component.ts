@@ -24,7 +24,7 @@ export class CreateComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  
+
   createFormStudent() {
     return new FormGroup({
       identificationNumber: new FormControl('', [Validators.required]),
@@ -35,7 +35,7 @@ export class CreateComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ]),
-      entryDate: new FormControl(''),
+      entryDate: new FormControl('', [Validators.required]),
       address: new FormGroup({
         ubication: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(25)])
       }),
@@ -66,6 +66,17 @@ export class CreateComponent implements OnInit {
       type: new FormControl('', [Validators.required, Validators.minLength(4)]),
       number: new FormControl('', [Validators.required, Validators.pattern('^8[0-9]{5,20}$')])
     }));
+  }
+
+  futureDate():boolean{
+    const fecha = new Date();
+    const fechaSele = new Date(this.entryDate?.value)
+    fecha.setHours(0,0,0,0);
+
+    fechaSele.setHours(0,0,0,0)
+    fechaSele.setDate(fechaSele.getDate()+1)
+
+    return (fechaSele > fecha);
   }
 
   get identificationNumber() { return this.studentForm.get('identificationNumber'); }
