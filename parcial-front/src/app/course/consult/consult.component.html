@@ -1,0 +1,56 @@
+<div class="card card-sm mb-3">
+  <div class="card-header">
+    Consult course
+  </div>
+  <div *ngIf="course!=null">
+  <div class="card-body">
+    <mat-accordion class="accordion-headers" multi>
+      <mat-expansion-panel hideToggle="false" class="acordeon">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Course
+          </mat-panel-title>
+          <mat-panel-description>
+            Informacion del curso
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-course-view [course]="course">
+
+        </app-course-view>
+
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle="false" class="acordeon">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Subject
+          </mat-panel-title>
+          <mat-panel-description>
+            Informacion Asignatura
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+            <app-subject [subject]="subject">
+
+            </app-subject>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle="false" class="acordeon">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Teachers
+          </mat-panel-title>
+          <mat-panel-description>
+            Lista de Profesores
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+            <app-teacher [teachers]="teachers">
+
+            </app-teacher>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+  </div>
+</div>

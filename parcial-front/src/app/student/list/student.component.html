@@ -1,0 +1,48 @@
+<div class="card text-white mb-3">
+    <div class="card-header">Students</div>
+    <div class="card-body">
+      <h5 class="card-title">List of Students</h5>
+      <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-warning" type="button" [routerLink]="['/students/form']">
+          Create Student
+        </button>
+      </div>
+      <div *ngIf="students?.length==0"  class="alert alert-info" >
+          No Students found in the database
+      </div>
+        
+      <table class="table table-bordered table-striped" *ngIf="students.length>0"> 
+        <thead>
+            <tr>
+                <th>Identificacion</th>
+                <th>Tipo ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Direccion</th>
+                <th>Telefonos</th>
+                <th>Detalles</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+                <td>{{student.identificationNumber}}</td>
+                <td>{{student.identificationType}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.lastName}}</td>
+                <td>{{student.email}}</td>
+                <td>{{student.address.ubication}}</td>
+                <td>
+                  <ul>
+                    <li *ngFor="let telephone of student.telephones">{{telephone.type}} - {{telephone.number}}</li>
+                  </ul>
+                </td>
+                
+                <td><button class="btn btn-info" (click)="editar(student)">Ver</button></td>
+                <td><button class="btn btn-danger"(click)="eliminar(student)">Eliminar</button></td>
+            </tr> 
+        </tbody>
+      </table>
+    </div>
+  </div>

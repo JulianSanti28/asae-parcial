@@ -1,0 +1,58 @@
+<div class="card text-white mb-3">
+  <div class="card-header">Course</div>
+  <div class="card-body">
+    <h5 class="card-title">List of Course</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-primary mb-3" type="button" [routerLink]="['/course/form']">
+        Crear Curso
+      </button>
+    </div>
+    <div *ngIf="courses?.length==0" class="alert alert-info" >
+        No Course found in the database
+    </div>
+
+    <table class="table table-bordered table-striped" *ngIf="courses.length>0">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Period</th>
+              <th>Subject</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses">
+          <td>{{course.courseId}}</td>
+          <td>{{course.name}}</td>
+          <td>{{course.period}}</td>
+          <td>{{course.subject.name}}</td>
+          <a (click)="delete(course.courseId)">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row g-3">
+      <div class="col-auto">
+        <label for="staticEmail2" class="visually-hidden">Buscar Curso</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" class="form-control" [(ngModel)]="courseId" placeholder="id" required minlength="2" #idCourse="ngModel">
+        <div class="alert alert-danger" *ngIf="idCourse.invalid && (idCourse.dirty || idCourse.touched)">
+          <div *ngIf="idCourse.errors?.['required']">
+            El id del curso es necesario
+          </div>
+          <div *ngIf="idCourse.errors?.['minlength']">
+            La longitud minima es 2
+          </div>
+        </div>
+      </div>
+      <div class="col-auto" *ngIf="idCourse.errors == null">
+        <button type="submit" class="btn btn-primary mb-3" [routerLink]="['/course/consult/', courseId] "  >
+          Consultar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

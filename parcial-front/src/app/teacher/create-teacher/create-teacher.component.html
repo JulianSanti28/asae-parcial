@@ -1,0 +1,187 @@
+<div class="card card-sm mb-3">
+  <div class="card-header">
+    Formulario de Profesor
+  </div>
+  <div class="card-body">
+    <ul class="alert alert-danger" *ngIf="errores != undefined && errores.length > 0 ">
+      <li *ngFor="let err of errores">
+        {{err}}
+      </li>
+    </ul>
+    <form [formGroup]="teacherForm">
+      <div class="form-group">
+        <label>Número de Identificación:</label>
+        <input type="number" formControlName="identificationNumber" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="identificationNumber?.getError('required') && (identificationNumber?.dirty || identificationNumber?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo número de identificación es requerido
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="identificationNumber?.valid && (identificationNumber?.dirty || identificationNumber?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                Numero de identificación es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Tipo de Identificación:</label>
+        <input type="text" formControlName="identificationType" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="identificationType?.getError('minlength') && (identificationType?.dirty || identificationType?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo tipo de identificacion no cumple la longitud mínima
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="identificationType?.valid && (identificationType?.dirty || identificationType?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                El campo tipo de identificacion es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input type="text" formControlName="name" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="name?.getError('maxlength') && (name?.dirty || name?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo nombre no cumple la longitud mínima
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="name?.getError('minlength') && (name?.dirty || name?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo nombre no cumple la longitud maxima
+              </div>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="name?.valid && (name?.dirty || name?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                Campo nombre es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Apellido:</label>
+        <input type="text" formControlName="lastName" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="lastName?.getError('maxlength') && (lastName?.dirty || lastName?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                  El campo no supera la longitud mínima
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="lastName?.getError('minlength') && (lastName?.dirty || lastName?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                  El campo supera la longitud máxima
+              </div>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="lastName?.valid && (lastName?.dirty || lastName?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                  Campo apellido es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Tipo de Profesor:</label>
+        <input type="text" formControlName="teacherType" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="teacherType?.getError('maxlength') && (teacherType?.dirty || teacherType?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                  El campo no supera la longitud mínima
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="teacherType?.getError('minlength') && (teacherType?.dirty || teacherType?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                  El campo supera la longitud máxima
+              </div>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="teacherType?.valid && (teacherType?.dirty || teacherType?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                  Campo tipo de profesor es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Universidad:</label>
+        <input type="text" formControlName="university" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="university?.getError('maxlength') && (university?.dirty || university?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                  El campo no supera la longitud mínima
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="university?.getError('minlength') && (university?.dirty || university?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                  El campo supera la longitud máxima
+              </div>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="university?.valid && (university?.dirty || university?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                  Campo universidad es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <div class="form-group">
+        <label>Salario:</label>
+        <input type="number" formControlName="salary" class="form-control" />
+        <!--Validaciones-->
+        <ng-template [ngIf]="salary?.getError('required') && (salary?.dirty || salary?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo salario es requerido
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="salary?.getError('min') && (salary?.dirty || salary?.touched)">
+          <div class="alert alert-danger">
+              <div class="container-error-message">
+                El campo salario no debe ser menor que 1
+              </div>
+           </div>
+        </ng-template>
+        <ng-template [ngIf]="salary?.valid && (salary?.dirty || salary?.touched)">
+          <div class="alert alert-success">
+              <div class="container-success-message">
+                Salario es correcto!
+              </div>
+            </div>
+        </ng-template>
+      </div>
+      <br><br>
+      <button type="submit" (click)="saveTeacher()" class="btn btn-info">Enviar</button>
+    </form>
+  </div>
+</div>
+
+
+

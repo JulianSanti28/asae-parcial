@@ -1,0 +1,40 @@
+<div class="card text-black mb-3">
+  <div class="card-header">Teacher</div>
+  <div class="card-body">
+    <h5 class="card-title">List of Teachers</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-warning" type="button" [routerLink]="['/teachers/form']">
+        Create Teacher
+      </button>
+    </div>
+    <div *ngIf="teachers?.length==0"  class="alert alert-info" >
+        No Teachers found in the database
+    </div>
+    <table class="table table-bordered table-striped" *ngIf="teachers?.length!=0">
+      <thead>
+          <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Identification</th>
+            <th>name</th>
+            <th>lastName</th>
+            <th>university</th>
+            <th>teacher type</th>
+            <th>salary</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let teacher of teachers">
+            <td>{{teacher.idPerson}}</td>
+            <td>{{teacher.identificationType}}</td>
+            <td>{{teacher.identificationNumber}}</td>
+            <td>{{teacher.name}}</td>
+            <td>{{teacher.lastName}}</td>
+            <td>{{teacher.university}}</td>
+            <td>{{teacher.teacherType}}</td>
+            <td>{{teacher.salary}}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
