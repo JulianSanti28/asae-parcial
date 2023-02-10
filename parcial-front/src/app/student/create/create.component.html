@@ -185,13 +185,12 @@
             <br>
             <button (click)="removePhone(i)" class="btn btn-danger">Eliminar</button>
           </div>
-          <div class="alert alert-danger" *ngIf="telephones.length < 2">
-            <div *ngIf="this.name?.errors?.['required']">
-              Se deben registrar minimo 2 telefonos
-            </div>
+
+        </div>
+        <div class="alert alert-danger" *ngIf="telephones.length < 2">
+          <div *ngIf="this.name?.errors?.['required']">
+            Se deben registrar minimo 2 telefonos
           </div>
-
-
         </div>
       </div>
       <br>
