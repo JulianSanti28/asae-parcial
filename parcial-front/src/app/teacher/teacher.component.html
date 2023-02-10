@@ -1,18 +1,26 @@
-<div class="card text-white bg-primary mb-3">
-  <diV class="card-body">
-    <h5 class="card-title">List of teachers</h5>
-    <table class="table table-bordered table-striped">
+<div class="card text-white mb-3">
+  <div class="card-header">Students</div>
+  <div class="card-body">
+    <h5 class="card-title">List of Students</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-warning" type="button" [routerLink]="['/teachers/form']">
+        Create Teacher
+      </button>
+    </div>
+    <table class="table table-bordered table-striped" >
       <thead>
-        <tr>
+          <tr>
             <th>ID</th>
             <th>Type</th>
             <th>Identification</th>
             <th>name</th>
             <th>lastName</th>
             <th>university</th>
-        </tr>
+            <th>detalles</th>
+            <th>eliminar</th>
+          </tr>
       </thead>
-        <tbody>
+      <tbody>
           <tr *ngFor="let teacher of teachers">
             <td>{{teacher.idPerson}}</td>
             <td>{{teacher.identificationType}}</td>
@@ -20,8 +28,11 @@
             <td>{{teacher.name}}</td>
             <td>{{teacher.lastName}}</td>
             <td>{{teacher.university}}</td>
+
+            <td><button class="btn btn-info" (click)="editar(teacher)">Ver</button></td>
+            <td><button class="btn btn-danger"(click)="eliminar(teacher)">Eliminar</button></td>
           </tr>
-        </tbody>
+      </tbody>
     </table>
-  </diV>
+  </div>
 </div>
