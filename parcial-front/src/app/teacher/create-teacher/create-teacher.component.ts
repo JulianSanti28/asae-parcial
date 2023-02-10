@@ -11,9 +11,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-teacher.component.css']
 })
 export class CreateTeacherComponent implements OnInit {
-  public teacherForm !: FormGroup;
-
+  teacherForm !: FormGroup;
   teacherModel: TeacherDTO = new TeacherDTO(0,'','','','','','',0)
+  errores !: string [];
 
   constructor(private teacherService: TeacherService, private frombuilder: FormBuilder, private router: Router) {
     this.teacherForm = this.createFormTeacher();
@@ -32,16 +32,17 @@ export class CreateTeacherComponent implements OnInit {
       teacherType: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
     });
   }
-
   saveTeacher() {
     Object.assign(this.teacherModel,this.teacherForm.value);
-    console.log(this.teacherModel)
     this.teacherService.saveTeacher(this.teacherModel).subscribe(response => {
         Swal.fire('Profesor registrado!', `Estudiante ${response.name} ha sido creado!`, 'success');
         this.router.navigate(['/teachers']);
       },
       err => {
-        Swal.fire('Cancelado!', `${err.error} !`, 'error');
+        this.errores = err.error as string [];
+        console.log("aqui",this.errores)
+        console.error('codigo del error desde el backend: '+ err.status);
+        Swal.fire('Profesor NO registrado!', `Verifique los campos e intente nuevamente `, 'error');
       }
     );
   }

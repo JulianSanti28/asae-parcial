@@ -3,6 +3,11 @@
     Formulario de Profesor
   </div>
   <div class="card-body">
+    <ul class="alert alert-danger" *ngIf="errores != undefined && errores.length > 0 ">
+      <li *ngFor="let err of errores">
+        {{err}}
+      </li>
+    </ul>
     <form [formGroup]="teacherForm">
       <div class="form-group">
         <label>Número de Identificación:</label>

@@ -10,21 +10,9 @@ import { TeacherService } from '../service/teacher/teacher.service';
 })
 export class TeacherComponent implements OnInit{
 
-  constructor(private teacherService: TeacherService, private router: Router) {
-
-  }
+  constructor() {}
   @Input('teachers') teachers!:TeacherDTO[];
   errors: string[] = [];
 
-  ngOnInit(): void {
-    this.teacherService.findAll().subscribe((response) => {
-      this.teachers = response;
-    })
-  }
-  editar(teacher: TeacherDTO) {
-    console.log("editar: " + teacher)
-  }
-  eliminar(teacher: TeacherDTO) {
-    console.log("eliminar: " +teacher)
-  }
+  ngOnInit(): void {}
 }

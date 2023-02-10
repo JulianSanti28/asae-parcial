@@ -39,7 +39,7 @@ export class FormComponent implements OnInit{
     this.courseService.save(this.course).subscribe(
       response =>{
         this.router.navigate(['/course']),
-        swal.fire('Nuevo Curso', `Curso ${response.name} creado con éxito!`,'success');
+        swal.fire('Nuevo Curso', `Curso ${response.name} creado con éxito!`,'success');
       },
       err => {
        console.log(err.error)

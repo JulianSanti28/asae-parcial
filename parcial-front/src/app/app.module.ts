@@ -23,6 +23,7 @@ import { TeacherComponent } from './teacher/teacher.component';
 import { SubjectComponent } from './subject/subject.component';
 import { CourseViewComponent } from './course/course-view/course-view.component';
 import { CreateTeacherComponent } from './teacher/create-teacher/create-teacher.component';
+import { ListTeacherComponent } from './teacher/list-teacher/list-teacher.component';
 
 
 
@@ -35,7 +36,7 @@ const routes: Routes = [
   { path: 'course', component: CourseComponent },
   { path: 'course/form', component: FormComponent },
   { path: 'course/consult/:courseId', component: ConsultComponent },
-  { path: 'teachers', component: TeacherComponent },
+  { path: 'teachers', component: ListTeacherComponent },
   { path: 'teachers/form', component: CreateTeacherComponent },
 
 ];
@@ -55,6 +56,7 @@ const routes: Routes = [
     SubjectComponent,
     CourseViewComponent,
     CreateTeacherComponent,
+    ListTeacherComponent,
   ],
   imports: [
     BrowserModule,
